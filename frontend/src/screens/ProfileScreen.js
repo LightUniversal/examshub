@@ -139,7 +139,7 @@ const ProfileScreen = () => {
                     {order.isPaid &&  (<FaCheck className="text-primary" />)}
                   </td>
                   <td>
-                    <LinkContainer to={`/orders/${order._id}/${order.user}`}>
+                    <LinkContainer to={`/ordered/${order._id}/${order.user}`}>
                         <Button className="btn-sm" variant="light">
                           Details
                         </Button>

@@ -204,7 +204,7 @@ const OrderScreen = () => {
                     <Loader />
                   ) : (
                     <div>
-                      <Button
+                      <Button className=" d-none "
                         onClick={onApproveTest}
                         style={{ marginBottom: "10px" }}
                       >
