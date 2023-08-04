@@ -11,7 +11,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <main className="py-3" style={{position:"relative", top:"80px"}}>
+      <main className="py-3" style={{position:"relative", top:"70px"}}>
         <Container>
           <Outlet />
           {/* Renders the child route's element, if there is one. */}

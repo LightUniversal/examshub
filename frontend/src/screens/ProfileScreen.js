@@ -113,9 +113,6 @@ const ProfileScreen = () => {
                   PAID (&#x20A6;)
                 </th>
                 <th>
-                  DELIVERD
-                </th>
-                <th>
 
                 </th>
               </tr>
@@ -133,11 +130,9 @@ const ProfileScreen = () => {
                     {order.total}
                   </td>
                   <td>
-                    {order.isPaid ? (order.paidAt.substring(0, 10)) : (<FaTimes className="text-danger" />)}
+                    {order.isPaid ? (<FaCheck className="text-primary" />) : (<FaTimes className="text-danger" />)}
                   </td>
-                  <td>
-                    {order.isPaid &&  (<FaCheck className="text-primary" />)}
-                  </td>
+                  
                   <td>
                     <LinkContainer to={`/ordered/${order._id}/${order.user}`}>
                       {order.isPaid ? (

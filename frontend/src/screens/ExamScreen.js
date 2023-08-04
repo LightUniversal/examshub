@@ -28,7 +28,6 @@ const ExamScreen = () => {
 
   const [show, setShow] = useState(false);
 
-
   // close Modal
   const handleClose = () => setShow(false);
 
@@ -90,13 +89,19 @@ const ExamScreen = () => {
               (Number(showScore) +
                 Number(i) / Number(product.questions.length)) *
               10;
-          }
+          } 
         });
-        console.log(showScore); 
+        console.log(showScore);
         document.querySelector("#form").classList.add("d-none");
         document.querySelector(".startBtn").classList.remove("d-none");
         document.querySelector(".score").classList.remove("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
+      }else {
+        showScore = 0;
+        document.querySelector("#form").classList.add("d-none");
+        document.querySelector(".score span").textContent = `${showScore}%`;
+        document.querySelector(".score").classList.remove("d-none");
+
       }
     });
     setTimerActive(false);

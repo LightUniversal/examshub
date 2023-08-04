@@ -114,7 +114,7 @@ const ProductScreen = () => {
       ) : (
         <>
         <Meta title={product.name} />
-          <Link to="/" className="btn btn-light my-3  text-white bg-black   py-2 rounded-1">
+          <Link to="/" className="btn btn-light my-2  text-white bg-black   py-2 rounded-1">
             <FaArrowCircleLeft /> Back
           </Link>
           <Row>
@@ -135,8 +135,8 @@ const ProductScreen = () => {
                 <ListGroup.Item>
                   <h5  className=" fw-bolder text-dark"><span>No. of Questions</span> - { + product.questions.length}</h5>
                 </ListGroup.Item>
-                <ListGroup.Item>
-                  Course-Outline: {product.courseOutline}
+                <ListGroup.Item className=" fw-medium">
+                  <h6 className=" fw-bold d-inline-block py-2 ">Course-Outline :</h6> {product.courseOutline}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
