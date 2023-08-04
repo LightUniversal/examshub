@@ -48,21 +48,21 @@ const PlaceOrderScreen = () => {
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
-            <ListGroup.Item>
+            {/* <ListGroup.Item>
               <p>
                 <h1>Details: </h1>
                 {cart.shippingAddress.department}, {cart.shippingAddress.city}, 
                 {cart.shippingAddress.level}, 
                 {cart.shippingAddress.semester}
               </p>
-            </ListGroup.Item>
+            </ListGroup.Item> */}
 
-            <ListGroup.Item>
+            {/* <ListGroup.Item className=" shadow-sm ">
               <h2>Payment</h2>
               <strong>{cart.paymentMethod}</strong>
-            </ListGroup.Item>
+            </ListGroup.Item> */}
             <ListGroup.Item>
-              <h2>Order Items</h2>
+              <h2 className="text-center">Order Items</h2>
               {cart.cartItems.length === 0 ? (
                 <Message>Your cart is empty</Message>
               ) : (
@@ -83,8 +83,8 @@ const PlaceOrderScreen = () => {
                             {item.name}
                           </Link>
                         </Col>
-                        <Col md={4}>
-                          {item.qty} X ${item.price} = ${item.price * item.qty}
+                        <Col md={4} className=" py-2  mx-0 rounded-1 shadow-sm  w-100 ">
+                          {item.qty} X &#x20A6;{item.price} = &#x20A6;{item.price * item.qty}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -103,25 +103,25 @@ const PlaceOrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items:</Col>
-                  <Col>${cart.itemsPrice}</Col>
+                  <Col>&#x20A6;{cart.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping:</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col>&#x20A6;{cart.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax:</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>&#x20A6;{cart.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total:</Col>
-                  <Col>${cart.total}</Col>
+                  <Col>&#x20A6;{cart.total}</Col>
                 </Row>
               </ListGroup.Item>
 

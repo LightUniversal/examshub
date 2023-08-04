@@ -101,7 +101,7 @@ const ProfileScreen = () => {
             <thead>
               <tr>
                 <th>
-                 QUESTION ID
+                 ORDER ID
                 </th>
                 <th>
                   DATE
@@ -110,7 +110,7 @@ const ProfileScreen = () => {
                   TOTAL
                 </th>
                 <th>
-                  PAID ($)
+                  PAID (&#x20A6;)
                 </th>
                 <th>
                   DELIVERD
@@ -140,9 +140,14 @@ const ProfileScreen = () => {
                   </td>
                   <td>
                     <LinkContainer to={`/ordered/${order._id}/${order.user}`}>
+                      {order.isPaid ? (
                         <Button className="btn-sm" variant="light">
-                          Details
-                        </Button>
+                        Details
+                      </Button>
+                      ) : (
+                        <p></p>
+                      )}
+                        
                     </LinkContainer>
                   </td>
                 </tr>
