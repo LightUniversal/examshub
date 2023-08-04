@@ -4,7 +4,7 @@ import { FaUser} from "react-icons/fa"
 
 const CheckOutSteps = ({ step1, step2, step3, step4}) => {
   return (
-    <Nav className="justify-content-center mb-4 border-bottom ">
+    <Nav className="justify-content-center mb-4 border-bottom bg-black rounded-1  shadow-sm ">
         <Nav.Item>
             {
                 step1 ? (
@@ -20,10 +20,10 @@ const CheckOutSteps = ({ step1, step2, step3, step4}) => {
             {
                 step2 ? (
                     <LinkContainer to="/shipping">
-                        <Nav.Link>Shipping  </Nav.Link>
+                        <Nav.Link>Details  </Nav.Link>
                     </LinkContainer>
                 ) : (
-                    <Nav.Link disabled>Shipping</Nav.Link>
+                    <Nav.Link disabled>Details</Nav.Link>
                 )
             }
         </Nav.Item>
@@ -31,10 +31,10 @@ const CheckOutSteps = ({ step1, step2, step3, step4}) => {
             {
                 step3 ? (
                     <LinkContainer to="/payment">
-                        <Nav.Link>Payment </Nav.Link>
+                        <Nav.Link>Payment Process </Nav.Link>
                     </LinkContainer>
                 ) : (
-                    <Nav.Link disabled>Payment</Nav.Link>
+                    <Nav.Link disabled>Payment Process</Nav.Link>
                 )
             }
         </Nav.Item>

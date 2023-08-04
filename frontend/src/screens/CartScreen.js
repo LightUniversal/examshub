@@ -55,7 +55,7 @@ const CartScreen = () => {
                     <Link to={`/product/${item._id}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>
-                    <Link to={`/product/${item.price}`}>${item.price}</Link>
+                    <p className="text-white bg-dark w-25 text-center px-1 py-2 rounded-1 shadow-sm ">&#x20A6;{item.price}</p>
                   </Col>
                   <Col md={2}>
                     <Form.Control
@@ -86,7 +86,7 @@ const CartScreen = () => {
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>Subtotal ({cartItems.reduce((a, i) => a + i.qty, 0)})</h2>$
+              <h2>Subtotal ({cartItems.reduce((a, i) => a + i.qty, 0)})</h2>&#x20A6;
               {cartItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>

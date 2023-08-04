@@ -114,7 +114,7 @@ const ProductScreen = () => {
       ) : (
         <>
         <Meta title={product.name} />
-          <Link to="/" className="btn btn-light my-3  text-dark  py-2 rounded-1">
+          <Link to="/" className="btn btn-light my-3  text-white bg-black   py-2 rounded-1">
             <FaArrowCircleLeft /> Back
           </Link>
           <Row>
@@ -147,7 +147,7 @@ const ProductScreen = () => {
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        <strong className=" text-dark ">	&#8358;{product.price}</strong>
+                        <strong className=" text-success px-2 py-1 " style={{backgroundColor:"rgba(203, 240, 227, 0.1)"}}>	&#x20A6;{product.price}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -189,7 +189,7 @@ const ProductScreen = () => {
                   )}
                   <ListGroup.Item>
                     <Button
-                      className=" border-0 py-2 bg-black "
+                      className=" border-0 py-2 bg-black rounded-1"
                       type="button"
                       disabled={product.countInStock === 0}
                       onClick={addToCartHandler}
@@ -221,9 +221,9 @@ const ProductScreen = () => {
                     <Form onSubmit={submitHandler}>
                       <Form.Group controlId="rating" className="my-2">
                         <Form.Label className="">
-                          Rating <FaStar style={{color: "gold"}} />
+                          Rating 
                         </Form.Label>
-                        <Form.Control
+                        <Form.Control className="rounded-0"
                           as="select"
                           value={rating}
                           onChange={(e) => setRating(Number(e.target.value))}
@@ -241,11 +241,11 @@ const ProductScreen = () => {
                       className="my-2"
                     >
                       <Form.Label className="">
-                        Comment <FaComments className=" text-primary " />
+                        Comment <FaComments className=" text-black " />
                       </Form.Label>
-                      <Form.Control as="textarea" row="3" value={comment} onChange={(e) => setComment(e.target.value)}>
+                      <Form.Control className="rounded-0" as="textarea" row="3" value={comment} onChange={(e) => setComment(e.target.value)}>
                       </Form.Control>
-                      <Button type="submit" style={{cursor:"pointer"}}>
+                      <Button type="submit" className=" bg-black border-0 rounded-1 " style={{cursor:"pointer"}}>
                         Comment <FaCommentAlt />
                       </Button>
                     </Form.Group>
