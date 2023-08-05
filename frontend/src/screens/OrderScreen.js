@@ -122,10 +122,12 @@ const OrderScreen = () => {
               </p>
               <p className="px-2 border-bottom">
                 <span>
-                  Details: {order.shippingAddress.department},
-                  {order.shippingAddress.city},
-                  {order.shippingAddress.level + " "},
-                  {order.shippingAddress.semester}
+                  Details: 
+                  <br />
+                  <h6>{order.shippingAddress.department}</h6>
+                  <h6>{order.shippingAddress.city}</h6>
+                  <h6>{order.shippingAddress.level + " "}</h6>
+                  <h6>{order.shippingAddress.semester}</h6>
                 </span>
               </p>
               {order.isPaid ? (
@@ -180,19 +182,19 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>&#x20A6;{order.itemsPrice}</Col>
                 </Row>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>&#x20A6;{order.shippingPrice}</Col>
                 </Row>
                 <Row>
                   <Col>tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>&#x20A6;{order.taxPrice}</Col>
                 </Row>
                 <Row>
                   <Col>total </Col>
-                  <Col>${order.total}</Col>
+                  <Col>&#x20A6;{order.total}</Col>
                 </Row>
               </ListGroup.Item>
 

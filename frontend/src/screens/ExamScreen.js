@@ -42,6 +42,7 @@ const ExamScreen = () => {
   console.log(productId, product);
   const [timerActive, setTimerActive] = useState(false);
   const [seconds, setSeconds] = useState(0);
+  const [mins, setMins] = useState(0);
   const questionsAnsweredRef = useRef(0);
 
   const handleStartTimer = (e) => {
@@ -51,7 +52,22 @@ const ExamScreen = () => {
     document.querySelector("#form").classList.remove("d-none");
     setTimerActive(true);
     const interval = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds + 1);
+      setSeconds((prevSeconds) => {
+        prevSeconds + 1
+        if(prevSeconds === 60) {
+          prevSeconds = 0;
+          setMins(mins + 1)
+        }
+        if(mins == 30) {
+          return 0
+        }
+        return prevSeconds + 1
+      });
+      if(seconds >= 60) {
+        setSeconds(0)
+        console.log(sec)
+        setMins(mins + 1)
+      }
     }, 1000);
     // Store the interval ID in the ref to clear it later
     questionsAnsweredRef.current = interval;
@@ -80,6 +96,7 @@ const ExamScreen = () => {
   // Submit questions
   const handleStopTimer = (e) => {
     e.preventDefault();
+    document.querySelector(".startBtn").classList.remove("d-none");
     Array.from(allRadioInputs).forEach((input, i) => {
       if (input.checked) {
         // console.log(input, rightAns[0].trim())
@@ -132,14 +149,15 @@ const ExamScreen = () => {
                 {/* <span className=" text-center text-white">
                   <FaStopwatch />:
                 </span> */}
-                <div className="shadow-sm px-2 py-1  rounded-1  fw-medium text-dark fw-bold hr">
-                  00 hr :
-                </div>
-                <div className="shadow-sm px-2 py-1  rounded-1 fw-medium text-dark fw-bold min">
-                  00 mins :
+                <div className=" px-2 py-1  rounded-1  fw-medium text-dark fw-bold hr">
+                  00 hr 
                 </div>
                 :
-                <div className="shadow-sm px-2 py-1  rounded-1  fw-medium text-dark fw-bold sec">
+                <div className=" px-2 py-1  rounded-1 fw-medium text-dark fw-bold min">
+                  {mins} mins 
+                </div>
+                :
+                <div className=" px-2 py-1  rounded-1  fw-medium text-dark fw-bold sec">
                   {seconds} sec
                 </div>
               </div>
@@ -196,7 +214,7 @@ const ExamScreen = () => {
               </Form.Group>
 
               {product.questions.map((question, i) => (
-                <Form.Group controlId={question.topic} key={i}>
+                <Form.Group controlId={question.topic} key={i} className="question__  ">
                   <ListGroup
                     id="question"
                     className=" shadow-sm p-3 my-2"
