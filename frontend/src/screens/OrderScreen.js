@@ -30,7 +30,7 @@ const OrderScreen = () => {
     isLoading,
     error,
   } = useGetOrderDetailsQuery(orderId);
-  console.log(orderId)
+  console.log(orderId);
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   console.log(order);
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
@@ -55,7 +55,7 @@ const OrderScreen = () => {
           type: "setLoadingStatus",
           value: "pending",
         });
-      }
+      };
       if (order && !order.isPaid) {
         if (!window.paypal) {
           loadPayPalScript();
@@ -64,37 +64,39 @@ const OrderScreen = () => {
     }
   }, [order, paypal, paypalDispatch, loadingPayPal, errorPayPal]);
   function onApprove(data, actions) {
-    return actions.order.capture().then( async function(details) {
+    return actions.order.capture().then(async function (details) {
       try {
-        await payOrder({ orderId, details});
+        await payOrder({ orderId, details });
         refetch(); // to call the above function again
-        toast.success("Payment Successful")
+        toast.success("Payment Successful");
       } catch (error) {
         toast.error(error?.data?.message || error.message);
       }
-    })
+    });
   }
   function onError(err) {
     toast.error(err.message);
   }
   function createOrder(data, actions) {
-    return actions.order.create({
-      purchase_units: [
-        {
-          amount: {
-            value: order.total,
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: {
+              value: order.total,
+            },
           },
-        },
-      ],
-    }).then((orderId) => {
-      return orderId;
-    })
+        ],
+      })
+      .then((orderId) => {
+        return orderId;
+      });
   }
-  async function onApproveTest () {
-    await payOrder({ orderId, details: { payer: {}}});
+  async function onApproveTest() {
+    await payOrder({ orderId, details: { payer: {} } });
     refetch();
     toast.success("Payment succeful");
-  };  
+  }
   return isLoading ? (
     <Loader />
   ) : error ? (
@@ -108,34 +110,25 @@ const OrderScreen = () => {
         <Col md={8}>
           <ListGroup>
             <ListGroup.Item>
-              <h2>
-                Details:
-              </h2>
+              <h2>Details:</h2>
+
               <p className="px-2 border-bottom">
-                <span>User name: {order.user.name}</span>
-              </p>
-              <p className="px-2 border-bottom ">
-                <span>
-                  User Email:
-                  {order.user.email}
-                </span>
-              </p>
-              <p className="px-2 border-bottom">
-                <span>
-                  Details: 
-                  <br />
-                  <h6>{order.shippingAddress.department}</h6>
-                  <h6>{order.shippingAddress.city}</h6>
-                  <h6>{order.shippingAddress.level + " "}</h6>
-                  <h6>{order.shippingAddress.semester}</h6>
-                </span>
+                <h6>Department: {order.shippingAddress.department}</h6>
+                <h6>Location: {order.shippingAddress.city}</h6>
+                <h6>Level: {order.shippingAddress.level + " "}</h6>
+                <h6>Semester: {order.shippingAddress.semester}</h6>
               </p>
               {order.isPaid ? (
-                <Link className=" bg-success  text-white px-2 py-1 text-decoration-none shadow-sm rounded-1 " to={`/profile`}>
+                <Link
+                  className=" bg-success  text-white px-2 py-1 text-decoration-none shadow-sm rounded-1 "
+                  to={`/profile`}
+                >
                   View Question
                 </Link>
               ) : (
-                <p  className=" bg-danger-subtle  text-white px-3 py-3 rounded-2 ">No Question Yet</p>
+                <p className=" bg-danger-subtle  text-white px-3 py-3 rounded-2 ">
+                  No Question Yet
+                </p>
               )}
             </ListGroup.Item>
             <ListGroup.Item></ListGroup.Item>
@@ -206,7 +199,8 @@ const OrderScreen = () => {
                     <Loader />
                   ) : (
                     <div>
-                      <Button className=" d-none "
+                      <Button
+                        className=" d-none "
                         onClick={onApproveTest}
                         style={{ marginBottom: "10px" }}
                       >
