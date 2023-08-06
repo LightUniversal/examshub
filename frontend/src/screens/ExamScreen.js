@@ -230,7 +230,7 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span  className="mx-3 px-4 text-center fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
+                      <span  className="mx-3 px-2 text-center fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
                       {question.question}
                       </span>
                     </p>
