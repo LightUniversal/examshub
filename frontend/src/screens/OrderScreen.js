@@ -103,15 +103,10 @@ const OrderScreen = () => {
     <Message variant="danger" />
   ) : (
     <>
-      <h5 className=" shadow rounded-1 px-4 py-2 border-bottom ">
-        Order: {order._id}
-      </h5>
       <Row>
         <Col md={8}>
           <ListGroup>
             <ListGroup.Item>
-              <h2>Details:</h2>
-
               <p className="px-2 border-bottom">
                 <h6>Department: {order.shippingAddress.department}</h6>
                 <h6>Location: {order.shippingAddress.city}</h6>
@@ -120,7 +115,7 @@ const OrderScreen = () => {
               </p>
               {order.isPaid ? (
                 <Link
-                  className=" bg-success  text-white px-2 py-1 text-decoration-none shadow-sm rounded-1 "
+                  className=" bg-success  text-white px-3 py-3 text-decoration-none shadow-sm rounded-1 "
                   to={`/profile`}
                 >
                   View Question

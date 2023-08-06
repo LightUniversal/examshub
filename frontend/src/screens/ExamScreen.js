@@ -102,10 +102,9 @@ const ExamScreen = () => {
         // console.log(input, rightAns[0].trim())
         rightAns.forEach((ans) => {
           if (ans.trim() === input.value.trim()) {
-            showScore +=
-              (Number(showScore) +
-                Number(i) / Number(product.questions.length)) *
-              10;
+            console.log(ans, input.value)
+            showScore += ((Number(showScore) + Number(i) / Number(product.questions.length)) * 10) + 10;
+            
           } 
         });
         console.log(showScore);
@@ -113,8 +112,8 @@ const ExamScreen = () => {
         document.querySelector(".startBtn").classList.remove("d-none");
         document.querySelector(".score").classList.remove("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
-      }else {
-        showScore = 0;
+      } else {
+        
         document.querySelector("#form").classList.add("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
         document.querySelector(".score").classList.remove("d-none");
@@ -131,7 +130,7 @@ const ExamScreen = () => {
       {isLoading ? (
         <Loader />
       ) : userinfo._id === userId ? (
-        <Container className="my-3">
+        <Container className="my-5">
           <Row>
             <Col
               md={6}
