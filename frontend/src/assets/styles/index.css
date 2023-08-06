@@ -40,6 +40,7 @@
   list-style-type: none;
   list-style: none;
   display: flex;
+
 }
 .question_ {
   padding: 15px 21px;
@@ -70,6 +71,7 @@
   width: 100%;
   cursor: pointer;
   padding: 15px 10px;
+  font-weight: bold;
   top: -0.5px;
 }
 .score_ {

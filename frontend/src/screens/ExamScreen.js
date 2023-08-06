@@ -221,7 +221,7 @@ const ExamScreen = () => {
                   >
                     <p className="question_ py-4  ">
                       <span
-                        className="mx-3 px-2   text-success d-inline py-1 my-1 rounded"
+                        className="mx-3 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
                         style={{  left:"0px", top:"15px", }}
                       >
                         <FaQuestionCircle
@@ -230,7 +230,7 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span  className="mx-3 px-4 text-center  d-inline-block py-4 my-1 shadow-sm rounded">
+                      <span  className="mx-3 px-4 text-center fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
                       {question.question}
                       </span>
                     </p>
