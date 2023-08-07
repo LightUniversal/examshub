@@ -119,6 +119,7 @@ const ExamScreen = () => {
     });
     setTimerActive(false);
     setSeconds(0);
+    setMins(0)
     clearInterval(questionsAnsweredRef.current);
   };
 
@@ -179,15 +180,15 @@ const ExamScreen = () => {
             </Col>
             <div className="words d-none text-center">
               {showScore >= 70 ? (
-                <Col className=" text-center px-2 py-2 fw-bold   shadow-sm rounded-1 text-green">
+                <Col className=" text-center px-4 py-2 fw-medium   shadow-sm rounded-1 text-green">
                   {words[0]}
                 </Col>
               ) : showScore >= 50 ? (
-                <Col className=" text-center px-2 py-2 fw-bold   shadow-sm rounded-1 text-bg-info ">
+                <Col className=" text-center px-4 py-2 fw-medium   shadow-sm rounded-1 text-bg-info ">
                   {words[1]}
                 </Col>
               ) : (
-                <Col className=" text-center px-2 py-2 fw-bold shadow-sm rounded-1 text-danger">
+                <Col className=" text-center px-4 py-2 fw-medium shadow-sm rounded-1 text-danger">
                   {words[2]}
                 </Col>
               )}
