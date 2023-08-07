@@ -25,8 +25,11 @@ import Message from "../components/Message";
 const ExamScreen = () => {
   let showScore = 0;
   const [topic, setTopic] = useState("");
-
+  const [subject, setSubject] = useState("");
   const [show, setShow] = useState(false);
+
+  // 
+  const [words, setWords] = useState("");
 
   // close Modal
   const handleClose = () => setShow(false);
@@ -79,10 +82,10 @@ const ExamScreen = () => {
     }
   };
   // Get and display soltuions
-  const getSolution = (e, { question, answer, solution }) => {
+  const getSolution = (e, { question, answer, solution, name }) => {
     e.preventDefault();
     setShow(true);
-    setAnswer(answer), setSolution(solution), setQuestion(question);
+    setAnswer(answer), setSolution(solution), setQuestion(question), setSubject(name);
   };
 
   // Get all the inputs elements
@@ -188,27 +191,19 @@ const ExamScreen = () => {
                   className=" fw-medium shadow py-3 px-3 text-white rounded-1  mx-1"
                   style={{ background: "rgba(0,0,0,0.51)" }}
                 >
-                  Choose Topic
+                  Course-Code 
                   <FaBookReader
                     style={{ position: "relative", top: "-2px" }}
                     className=" text-white "
                   />
                 </Form.Label>
                 <Form.Control
-                  as="select"
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
                   className="topicselect shadow-sm fw-medium text-dark mx-1 "
                   style={{ background: "rgba(2,0,10,0.1)" }}
                 >
-                  {product.questions.map((question, i) => (
-                    <option
-                      key={question.topic + `${i}`}
-                      value={question.topic}
-                    >
-                      {question.topic}
-                    </option>
-                  ))}
+                  
                 </Form.Control>
               </Form.Group>
 
@@ -230,8 +225,8 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span  className="mx-3 px-2 text-justify fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
-                      {question.question}
+                      <span  className="mx-3 px-4 text-center fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
+                      {question.question.trim()}
                       </span>
                     </p>
 
@@ -294,6 +289,7 @@ const ExamScreen = () => {
                             question: question.question,
                             answer: question.answer,
                             solution: question.solution,
+                            name : product.name
                           })
                         }
                       >
