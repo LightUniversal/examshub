@@ -28,9 +28,12 @@ const ExamScreen = () => {
   const [subject, setSubject] = useState("");
   const [show, setShow] = useState(false);
 
-  // 
-  const [words, setWords] = useState("");
-
+  //
+  const words = [
+    "Good, remember, proper preparation, through practice promotes excellent results!",
+    "Excellent! Practice more to get familiar with questions",
+    "You did'nt apply the principles for solving each questions. Go and Learn",
+  ];
   // close Modal
   const handleClose = () => setShow(false);
 
@@ -51,41 +54,40 @@ const ExamScreen = () => {
   const handleStartTimer = (e) => {
     e.preventDefault();
     e.target.classList.add("d-none");
+    document.querySelector(".words").classList.add("d-none");
     document.querySelector(".score").classList.add("d-none");
     document.querySelector("#form").classList.remove("d-none");
     setTimerActive(true);
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
-        prevSeconds + 1
-        if(prevSeconds === 60) {
+        prevSeconds + 1;
+        if (prevSeconds === 60) {
           prevSeconds = 0;
-          setMins(mins + 1)
+          setMins(mins + 1);
         }
-        if(mins == 30) {
-          return 0
+        if (mins == 30) {
+          return 0;
         }
-        return prevSeconds + 1
+        return prevSeconds + 1;
       });
-      if(seconds >= 60) {
-        setSeconds(0)
-        console.log(sec)
-        setMins(mins + 1)
+      if (seconds >= 60) {
+        setSeconds(0);
+        console.log(sec);
+        setMins(mins + 1);
       }
     }, 1000);
     // Store the interval ID in the ref to clear it later
     questionsAnsweredRef.current = interval;
   };
 
-  const handleQuestionAnswered = () => {
-    if (timerActive) {
-      questionsAnsweredRef.current += 1;
-    }
-  };
+  
   // Get and display soltuions
-  const getSolution = (e, { question, answer, solution, name }) => {
+  const getSolution = (e, { question, answer, solution}) => {
     e.preventDefault();
     setShow(true);
-    setAnswer(answer), setSolution(solution), setQuestion(question), setSubject(name);
+    setAnswer(answer),
+    setSolution(solution),
+    setQuestion(question)
   };
 
   // Get all the inputs elements
@@ -105,22 +107,24 @@ const ExamScreen = () => {
         // console.log(input, rightAns[0].trim())
         rightAns.forEach((ans) => {
           if (ans.trim() === input.value.trim()) {
-            console.log(ans, input.value)
-            showScore += ((Number(showScore) + Number(i) / Number(product.questions.length)) * 10) + 10;
-            
-          } 
+            console.log(ans, input.value);
+            showScore +=
+              (Number(showScore) +
+                Number(i) / Number(product.questions.length)) *
+                10 +
+              10;
+          }
         });
         console.log(showScore);
         document.querySelector("#form").classList.add("d-none");
         document.querySelector(".startBtn").classList.remove("d-none");
+        document.querySelector(".words").classList.remove("d-none");
         document.querySelector(".score").classList.remove("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
       } else {
-        
         document.querySelector("#form").classList.add("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
         document.querySelector(".score").classList.remove("d-none");
-
       }
     });
     setTimerActive(false);
@@ -152,11 +156,11 @@ const ExamScreen = () => {
                   <FaStopwatch />:
                 </span> */}
                 <div className=" px-2 py-1  rounded-1  fw-medium text-dark fw-bold hr">
-                  00 hr 
+                  00 hr
                 </div>
                 :
                 <div className=" px-2 py-1  rounded-1 fw-medium text-dark fw-bold min">
-                  {mins} mins 
+                  {mins} mins
                 </div>
                 :
                 <div className=" px-2 py-1  rounded-1  fw-medium text-dark fw-bold sec">
@@ -183,6 +187,21 @@ const ExamScreen = () => {
                 <FaHourglassStart /> Start
               </Button>
             </Col>
+            <div className="words d-none text-center">
+              {showScore >= 70 ? (
+                <Col className=" text-center px-2 py-2 fw-bold   shadow-sm rounded-1 text-green">
+                  {words[0]}
+                </Col>
+              ) : showScore >= 50 ? (
+                <Col className=" text-center px-2 py-2 fw-bold   shadow-sm rounded-1 text-bg-info ">
+                  {words[1]}
+                </Col>
+              ) : (
+                <Col className=" text-center px-2 py-2 fw-bold shadow-sm rounded-1 text-danger">
+                  {words[2]}
+                </Col>
+              )}
+            </div>
           </Row>
           <div className="body my-4 border-top py-3 ">
             <Form className=" d-none " id="form">
@@ -191,7 +210,7 @@ const ExamScreen = () => {
                   className=" fw-medium shadow py-3 px-3 text-white rounded-1  mx-1"
                   style={{ background: "rgba(0,0,0,0.51)" }}
                 >
-                  Course-Code 
+                  Course-Code
                   <FaBookReader
                     style={{ position: "relative", top: "-2px" }}
                     className=" text-white "
@@ -202,13 +221,15 @@ const ExamScreen = () => {
                   onChange={(e) => setTopic(e.target.value)}
                   className="topicselect shadow-sm fw-medium text-dark mx-1 "
                   style={{ background: "rgba(2,0,10,0.1)" }}
-                >
-                  
-                </Form.Control>
+                ></Form.Control>
               </Form.Group>
 
               {product.questions.map((question, i) => (
-                <Form.Group controlId={question.topic} key={i} className="question__  ">
+                <Form.Group
+                  controlId={question.topic}
+                  key={i}
+                  className="question__  "
+                >
                   <ListGroup
                     id="question"
                     className=" shadow-sm p-3 my-2"
@@ -217,7 +238,7 @@ const ExamScreen = () => {
                     <p className="question_ py-4  ">
                       <span
                         className="mx-3 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
-                        style={{  left:"0px", top:"15px", }}
+                        style={{ left: "0px", top: "15px" }}
                       >
                         <FaQuestionCircle
                           className=" text-success mx-1 "
@@ -225,8 +246,8 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span  className="mx-3 px-4 text-center fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
-                      {question.question.trim()}
+                      <span className="mx-3 px-4 text-center fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
+                        {question.question.trim()}
                       </span>
                     </p>
 
@@ -289,7 +310,6 @@ const ExamScreen = () => {
                             question: question.question,
                             answer: question.answer,
                             solution: question.solution,
-                            name : product.name
                           })
                         }
                       >
