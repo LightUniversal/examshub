@@ -24,8 +24,6 @@ import Message from "../components/Message";
 
 const ExamScreen = () => {
   let showScore = 0;
-  const [topic, setTopic] = useState("");
-  const [subject, setSubject] = useState("");
   const [show, setShow] = useState(false);
 
   //
@@ -43,16 +41,16 @@ const ExamScreen = () => {
 
   const { id: productId, paidUser: userId } = useParams();
   const { userinfo } = useSelector((state) => state.auth);
+  const [timerActive, setTimerActive] = useState(false);
 
   const { data: product, isLoading, error } = useGetProductQuery(productId);
-  console.log(productId, product);
-  const [timerActive, setTimerActive] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [mins, setMins] = useState(0);
   const questionsAnsweredRef = useRef(0);
 
   const handleStartTimer = (e) => {
     e.preventDefault();
+    showScore = 0;
     e.target.classList.add("d-none");
     document.querySelector(".words").classList.add("d-none");
     document.querySelector(".score").classList.add("d-none");
@@ -72,7 +70,6 @@ const ExamScreen = () => {
       });
       if (seconds >= 60) {
         setSeconds(0);
-        console.log(sec);
         setMins(mins + 1);
       }
     }, 1000);
@@ -92,7 +89,6 @@ const ExamScreen = () => {
 
   // Get all the inputs elements
   const allRadioInputs = document.querySelectorAll("input[type='radio']");
-  console.log(allRadioInputs);
   const rightAns =
     !isLoading &&
     product.questions.map((quest) => {
@@ -107,15 +103,9 @@ const ExamScreen = () => {
         // console.log(input, rightAns[0].trim())
         rightAns.forEach((ans) => {
           if (ans.trim() === input.value.trim()) {
-            console.log(ans, input.value);
-            showScore +=
-              (Number(showScore) +
-                Number(i) / Number(product.questions.length)) *
-                10 +
-              10;
+            showScore += Number(100 / Number(product.questions.length)) ;
           }
         });
-        console.log(showScore);
         document.querySelector("#form").classList.add("d-none");
         document.querySelector(".startBtn").classList.remove("d-none");
         document.querySelector(".words").classList.remove("d-none");
@@ -205,7 +195,7 @@ const ExamScreen = () => {
           </Row>
           <div className="body my-4 border-top py-3 ">
             <Form className=" d-none " id="form">
-              <Form.Group controlId="topic" className=" text-center ">
+              <Form.Group controlId="subject" className=" text-center ">
                 <Form.Label
                   className=" fw-medium shadow py-3 px-3 text-white rounded-1  mx-1"
                   style={{ background: "rgba(0,0,0,0.51)" }}
@@ -213,13 +203,13 @@ const ExamScreen = () => {
                   Course-Code
                   <FaBookReader
                     style={{ position: "relative", top: "-2px" }}
-                    className=" text-white "
+                    className=" text-white mx-1 text-success"
                   />
                 </Form.Label>
                 <Form.Control
-                  value={topic}
+                  value={product.name}
                   onChange={(e) => setTopic(e.target.value)}
-                  className="topicselect shadow-sm fw-medium text-dark mx-1 "
+                  className="subject shadow-sm fw-medium text-dark mx-1 "
                   style={{ background: "rgba(2,0,10,0.1)" }}
                 ></Form.Control>
               </Form.Group>
