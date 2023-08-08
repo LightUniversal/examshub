@@ -276,7 +276,7 @@ const ExamScreen = () => {
                         type="radio"
                         id={(question.options[0] + `${i}`).trim()}
                         name={question.topic}
-                        className=" inline"
+                        className=""
                         value={question.options[0]}
                       />
                       <label htmlFor={(question.options[0] + `${i}`).trim()}>
