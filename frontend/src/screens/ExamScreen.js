@@ -146,7 +146,7 @@ const ExamScreen = () => {
               style={{ display: "flex", justifyContent: "space-around" }}
             >
               <div
-                className="  time px-3 rounded-1   "
+                className="  time px-3 rounded-1 w-100 shadow-sm  "
                 style={{
                   position: "fixed",
                   zIndex: "100",
@@ -270,7 +270,7 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span className="mx-2 px-3 text-center fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
+                      <span className="mx-2 px-3 text-justify fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
                         {question.question.trim()}
                       </span>
                     </p>
