@@ -143,7 +143,7 @@ const ExamScreen = () => {
               style={{ display: "flex", justifyContent: "space-around" }}
             >
               <div
-                className="  time px-3 rounded-1   "
+                className="  time px-3 rounded-1 py-1 "
                 style={{
                   position: "fixed",
                   zIndex: "100",
@@ -176,7 +176,7 @@ const ExamScreen = () => {
               </h4>
             </Col>
             <Col
-              className="fw-medium py-1 mx-2"
+              className="fw-medium py-1 mx-2 mt-2 "
               style={{ position: "relative", right: "-30px", top: "4px" }}
             >
               <Button

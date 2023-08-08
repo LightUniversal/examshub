@@ -167,9 +167,12 @@ main {
     z-index: 2000;
     border-radius: 3px;
   }
+  .body {
+    border-top: none !important;
+  }
   .time {
     width: 100% !important;
-    border-bottom:thin solid rgba(104, 101, 101, 0.1);
+    border-bottom:thin solid rgba(104, 101, 101, 0.4);
     text-align: center;
   }
 }
