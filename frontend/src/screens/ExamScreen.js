@@ -14,6 +14,7 @@ import {
   FaBookReader,
   FaHourglassStart,
   FaQuestionCircle,
+  FaInfoCircle,
   FaUserPlus,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -134,7 +135,7 @@ const ExamScreen = () => {
       {isLoading ? (
         <Loader />
       ) : userinfo._id === userId ? (
-        <Container className="my-3">
+        <Container className="my-4">
           <Row>
             <Col
               md={6}
@@ -152,15 +153,15 @@ const ExamScreen = () => {
                 {/* <span className=" text-center text-white">
                   <FaStopwatch />:
                 </span> */}
-                <div className=" px-2 py-1  text-white fw-bold hr" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
+                <div className=" px-2 py-1  text-white fw-bold hr" style={{ borderRadius:"2px" }}>
                   00 hr
                 </div>
                 :
-                <div className=" px-2 py-1  text-white fw-bold min" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
+                <div className=" px-2 py-1  text-white fw-bold min" style={{ borderRadius:"2px" }}>
                   {minutes} mins
                 </div>
                 :
-                <div className=" px-2 py-1  text-white fw-bold sec" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
+                <div className=" px-2 py-1  text-white fw-bold sec" style={{  borderRadius:"2px" }}>
                   {seconds} sec
                 </div>
               </div>
@@ -256,7 +257,7 @@ const ExamScreen = () => {
                   >
                     <p className="question_ py-4  ">
                       <span
-                        className="mx-3 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
+                        className="mx-2 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
                         style={{ left: "0px", top: "15px" }}
                       >
                         <FaQuestionCircle
@@ -265,7 +266,7 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span className="mx-3 px-4 text-center fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
+                      <span className="mx-2 px-3 text-center fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
                         {question.question.trim()}
                       </span>
                     </p>
@@ -332,7 +333,7 @@ const ExamScreen = () => {
                           })
                         }
                       >
-                        Solution
+                        Solution <FaInfoCircle />
                       </button>
                     </div>
                   </ListGroup>
