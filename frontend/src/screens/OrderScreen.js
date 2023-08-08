@@ -195,7 +195,7 @@ const OrderScreen = () => {
                   ) : (
                     <div>
                       <Button
-                        className=" d-none "
+                        className=" "
                         onClick={onApproveTest}
                         style={{ marginBottom: "10px" }}
                       >

@@ -38,6 +38,7 @@ const ExamScreen = () => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [solution, setSolution] = useState("");
+  // const [mode, setMode] = useState("Select Mode...");
 
   const { id: productId, paidUser: userId } = useParams();
   const { userinfo } = useSelector((state) => state.auth);
@@ -45,7 +46,8 @@ const ExamScreen = () => {
 
   const { data: product, isLoading, error } = useGetProductQuery(productId);
   const [seconds, setSeconds] = useState(0);
-  const [mins, setMins] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  let mins = 0;
   const questionsAnsweredRef = useRef(0);
 
   const handleStartTimer = (e) => {
@@ -61,7 +63,12 @@ const ExamScreen = () => {
         prevSeconds + 1;
         if (prevSeconds === 60) {
           prevSeconds = 0;
-          setMins(mins + 1);
+          // mins+=1
+          setMinutes((minutes) => {
+            return (minutes + 1)-1 + 1
+          })
+
+          console.log(mins)
         }
         if (mins == 30) {
           return 0;
@@ -70,7 +77,6 @@ const ExamScreen = () => {
       });
       if (seconds >= 60) {
         setSeconds(0);
-        setMins(mins + 1);
       }
     }, 1000);
     // Store the interval ID in the ref to clear it later
@@ -128,7 +134,7 @@ const ExamScreen = () => {
       {isLoading ? (
         <Loader />
       ) : userinfo._id === userId ? (
-        <Container className="my-5">
+        <Container className="my-3">
           <Row>
             <Col
               md={6}
@@ -146,15 +152,15 @@ const ExamScreen = () => {
                 {/* <span className=" text-center text-white">
                   <FaStopwatch />:
                 </span> */}
-                <div className=" px-2 py-1  rounded-1  fw-medium text-dark fw-bold hr">
+                <div className=" px-2 py-1  text-white fw-bold hr" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
                   00 hr
                 </div>
                 :
-                <div className=" px-2 py-1  rounded-1 fw-medium text-dark fw-bold min">
-                  {mins} mins
+                <div className=" px-2 py-1  text-white fw-bold min" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
+                  {minutes} mins
                 </div>
                 :
-                <div className=" px-2 py-1  rounded-1  fw-medium text-dark fw-bold sec">
+                <div className=" px-2 py-1  text-white fw-bold sec" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
                   {seconds} sec
                 </div>
               </div>
@@ -201,7 +207,7 @@ const ExamScreen = () => {
                   className=" fw-medium shadow py-3 px-3 text-white rounded-1  mx-1"
                   style={{ background: "rgba(0,0,0,0.51)" }}
                 >
-                  Course-Code
+                  Course
                   <FaBookReader
                     style={{ position: "relative", top: "-2px" }}
                     className=" text-white mx-1 text-success"
@@ -214,6 +220,28 @@ const ExamScreen = () => {
                   style={{ background: "rgba(2,0,10,0.1)" }}
                 ></Form.Control>
               </Form.Group>
+              {/* <Form.Group controlId="exammode" className=" text-center my-2 shadow-sm  py-2  "> */}
+              {/* <Form.Label
+                  className=" fw-medium shadow py-3 px-3 text-white rounded-1  mx-1"
+                  style={{ background: "rgba(0,0,0,0.51)" }}
+                >
+                  Question-Mode
+                  <FaBookReader
+                    style={{ position: "relative", top: "-2px" }}
+                    className=" text-white mx-1 text-success"
+                  />
+                </Form.Label> */}
+                {/* <Form.Control
+                  as="select"
+                  value={mode}
+                  onChange={(e) => setMode(e.target.value)}
+                  className="subject shadow-sm fw-medium text-dark mx-1 "
+                  style={{ background: "rgba(2,0,10,0.1)" }}
+                >
+                  <option value="Learning Mode">Learning Mode</option>
+                  <option value="Exam Mode">Exam Mode </option>
+                </Form.Control>
+              </Form.Group> */}
 
               {product.questions.map((question, i) => (
                 <Form.Group

@@ -40,7 +40,7 @@ const LoginScreen = () => {
       // The unwrap extracts values 
       dispatch(setCredentials({...res,}));
       navigate(redirect);
-      toast.success("Welcome to LuProshop...");
+      toast.success("Welcome to ExamHub...");
     } catch (error){
       toast.error(error?.data?.message || error.error)
     }
