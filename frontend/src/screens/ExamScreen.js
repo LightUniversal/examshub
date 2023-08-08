@@ -14,6 +14,7 @@ import {
   FaBookReader,
   FaHourglassStart,
   FaQuestionCircle,
+  FaStopCircle,
   FaUserPlus,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -256,7 +257,7 @@ const ExamScreen = () => {
                   >
                     <p className="question_ py-4  ">
                       <span
-                        className="mx-3 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
+                        className="mx-2 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
                         style={{ left: "0px", top: "15px" }}
                       >
                         <FaQuestionCircle
@@ -320,7 +321,8 @@ const ExamScreen = () => {
                         className="submit border-0 bg-danger rounded-1 text-white px-3 py-2"
                         onClick={(e) => handleStopTimer(e)}
                       >
-                        Submit
+                        Submit <FaStopCircle style={{ position: "relative", top: "-2px" }}
+                    className=" text-white mx-1 text-success" />
                       </button>
                       <button
                         className="next shadow px-3 py-2 bg-success text-white rounded-1 "
