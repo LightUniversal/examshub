@@ -14,7 +14,11 @@ import {
   FaBookReader,
   FaHourglassStart,
   FaQuestionCircle,
+<<<<<<< HEAD
   FaStopCircle,
+=======
+  FaInfoCircle,
+>>>>>>> fe92957d41b35365e3f00c8782b51cede6a67e1c
   FaUserPlus,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -126,7 +130,7 @@ const ExamScreen = () => {
     });
     setTimerActive(false);
     setSeconds(0);
-    setMins(0)
+    setMinutes(0)
     clearInterval(questionsAnsweredRef.current);
   };
 
@@ -135,7 +139,7 @@ const ExamScreen = () => {
       {isLoading ? (
         <Loader />
       ) : userinfo._id === userId ? (
-        <Container className="my-3">
+        <Container className="my-4">
           <Row>
             <Col
               md={6}
@@ -153,15 +157,15 @@ const ExamScreen = () => {
                 {/* <span className=" text-center text-white">
                   <FaStopwatch />:
                 </span> */}
-                <div className=" px-2 py-1  text-white fw-bold hr" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
+                <div className=" px-2 py-1  text-dark fw-bold hr" style={{ borderRadius:"2px" }}>
                   00 hr
                 </div>
                 :
-                <div className=" px-2 py-1  text-white fw-bold min" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
+                <div className=" px-2 py-1  text-dark fw-bold min" style={{ borderRadius:"2px" }}>
                   {minutes} mins
                 </div>
                 :
-                <div className=" px-2 py-1  text-white fw-bold sec" style={{ background: "rgba(2,0,10,0.8)", borderRadius:"2px" }}>
+                <div className=" px-2 py-1  text-dark fw-bold sec" style={{  borderRadius:"2px" }}>
                   {seconds} sec
                 </div>
               </div>
@@ -217,7 +221,7 @@ const ExamScreen = () => {
                 <Form.Control
                   value={product.name}
                   onChange={(e) => setTopic(e.target.value)}
-                  className="subject shadow-sm fw-medium text-dark mx-1 "
+                  className="subject shadow-sm py-3 fw-medium text-dark mx-1 "
                   style={{ background: "rgba(2,0,10,0.1)" }}
                 ></Form.Control>
               </Form.Group>
@@ -266,7 +270,7 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span className="mx-3 px-4 text-center fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
+                      <span className="mx-2 px-3 text-center fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
                         {question.question.trim()}
                       </span>
                     </p>
@@ -276,7 +280,7 @@ const ExamScreen = () => {
                         type="radio"
                         id={(question.options[0] + `${i}`).trim()}
                         name={question.topic}
-                        className=" inline"
+                        className=""
                         value={question.options[0]}
                       />
                       <label htmlFor={(question.options[0] + `${i}`).trim()}>
@@ -334,7 +338,7 @@ const ExamScreen = () => {
                           })
                         }
                       >
-                        Solution
+                        Solution <FaInfoCircle  style={{ position: "relative", top: "-1.5px" }}/>
                       </button>
                     </div>
                   </ListGroup>

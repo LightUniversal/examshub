@@ -106,7 +106,7 @@ const OrderScreen = () => {
       <Row>
         <Col md={8}>
           <ListGroup>
-            <ListGroup.Item>
+            <ListGroup.Item className="my-2">
               <p className="px-2 border-bottom">
                 <h6>Department: {order.shippingAddress.department}</h6>
                 <h6>Location: {order.shippingAddress.city}</h6>
@@ -115,7 +115,7 @@ const OrderScreen = () => {
               </p>
               {order.isPaid ? (
                 <Link
-                  className=" bg-success  text-white px-3 py-3 text-decoration-none shadow-sm rounded-1 "
+                  className=" bg-success  text-white px-3 py-2 my-1 text-decoration-none shadow-sm rounded-1 "
                   to={`/profile`}
                 >
                   View Question
@@ -126,8 +126,8 @@ const OrderScreen = () => {
                 </p>
               )}
             </ListGroup.Item>
-            <ListGroup.Item></ListGroup.Item>
-            <ListGroup.Item>
+    
+            <ListGroup.Item className="my-2">
               <h2>Payment Method</h2>
               <p>
                 <strong>Method:</strong>
@@ -139,7 +139,7 @@ const OrderScreen = () => {
                 <Message variant="danger">Not Paid</Message>
               )}
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item className="my-2">
               <h2>Order Items</h2>
               {order.orderItems.map((item, i) => (
                 <ListGroup.Item key={i}>
