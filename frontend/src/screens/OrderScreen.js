@@ -115,7 +115,7 @@ const OrderScreen = () => {
               </p>
               {order.isPaid ? (
                 <Link
-                  className=" bg-success  text-white px-3 py-3 text-decoration-none shadow-sm rounded-1 "
+                  className=" bg-success  text-white px-3 py-2 my-1 text-decoration-none shadow-sm rounded-1 "
                   to={`/profile`}
                 >
                   View Question
