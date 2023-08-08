@@ -74,7 +74,6 @@
   width: 100%;
   cursor: pointer;
   padding: 15px 10px;
-  font-weight: 600;
 }
 .score_ {
   /* height: 60px; */
@@ -168,5 +167,9 @@ main {
     z-index: 2000;
     border-radius: 3px;
   }
- 
+  .time {
+    width: 100% !important;
+    border-bottom:thin solid rgba(104, 101, 101, 0.1);
+    text-align: center;
+  }
 }

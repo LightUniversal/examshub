@@ -267,7 +267,7 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span className="mx-2 px-3 text-justify fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
+                      <span className="mx-2 px-3 text-justify fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
                         {question.question.trim()}
                       </span>
                     </p>
