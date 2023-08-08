@@ -13,12 +13,9 @@ import {
   FaArrowAltCircleRight,
   FaBookReader,
   FaHourglassStart,
-  FaQuestionCircle,
-<<<<<<< HEAD
-  FaStopCircle,
-=======
   FaInfoCircle,
->>>>>>> fe92957d41b35365e3f00c8782b51cede6a67e1c
+  FaQuestionCircle,
+  FaStopCircle,
   FaUserPlus,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -270,7 +267,7 @@ const ExamScreen = () => {
                         />
                         -{i + 1}
                       </span>
-                      <span className="mx-2 px-3 text-center fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
+                      <span className="mx-2 px-3 text-justify fw-bold d-inline-block py-4 my-1 shadow-sm rounded">
                         {question.question.trim()}
                       </span>
                     </p>

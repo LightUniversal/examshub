@@ -13,7 +13,7 @@ import {
   useGetProductQuery,
   useCreateQuestionMutation,
 } from "../../slices/productApiSlice";
-import { FaArrowAltCircleLeft, FaEdit, FaPlusSquare } from "react-icons/fa";
+import { FaArrowAltCircleLeft, FaEdit, FaPlusCircle, FaPlusSquare } from "react-icons/fa";
 
 const ProductEditScreen = () => {
   // Get the productId
@@ -74,7 +74,14 @@ const ProductEditScreen = () => {
       }).unwrap();
       refetch();
       toast.success("Questions added");
-      setAnswer(""), setA(""), setB(""), setC(""), setSolution(""), setTopic(""), setD(""), setQuestion("")
+      setAnswer(""),
+        setA(""),
+        setB(""),
+        setC(""),
+        setSolution(""),
+        setTopic(""),
+        setD(""),
+        setQuestion("");
     } catch (error) {
       toast.error(error?.data?.message || error.error);
     }
@@ -116,7 +123,7 @@ const ProductEditScreen = () => {
       <Link to="/admin/productlist" className="btn btn-light my-3">
         <FaArrowAltCircleLeft /> Go Back
       </Link>
-      <FormContainer> 
+      <FormContainer>
         <h2 className=" border-bottom ">
           Edit Product
           <FaEdit
@@ -197,8 +204,9 @@ const ProductEditScreen = () => {
           </Form>
         )}
       </FormContainer>
-      <FormContainer>
-        <Form onSubmit={addQuestions}>
+      <FormContainer >
+        <Form onSubmit={addQuestions} className="mt-4 ">
+          <h3 className=" border-bottom ">Add Questions </h3>
           <Form.Group controlId="question">
             <Form.Label>Question</Form.Label>
             <Form.Control
@@ -209,61 +217,71 @@ const ProductEditScreen = () => {
               onChange={(e) => setQuestion(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId="options" className="my-1">
+          <Form.Group controlId="options" className="mt-2 mb-1">
+            <Form.Label className="my-0">Option A</Form.Label>
+
             <Form.Control
               type="text"
               placeholder="Enter Option A"
               value={a}
               onChange={(e) => setA(e.target.value)}
-              className="my-2"
+              className="my-2 rounded-0 "
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="b">
+            <Form.Label className="my-0">Option B</Form.Label>
+
             <Form.Control
               type="text"
               placeholder="Enter Option B"
               value={b}
               onChange={(e) => setB(e.target.value)}
-              className="my-2"
+              className="my-2 rounded-0 "
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="c">
+            <Form.Label className="my-0">Option C</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter Option C"
               value={c}
               onChange={(e) => setC(e.target.value)}
-              className="my-2"
+              className="my-2 rounded-0 "
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId="d">
+          <Form.Group controlId="d" className="my-1">
+            <Form.Label className="my-0">Option D</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter Option D"
               value={d}
               onChange={(e) => setD(e.target.value)}
-              className="my-2"
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="topic">
-            <Form.Control
-              type="text"
-              placeholder="Enter the topic"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              className="my-2"
+              className="my-2 rounded-0 "
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="answer">
+            <Form.Label
+              className="my-0"
+              style={{ marginBottom: "0px !important" }}
+            >
+              Answer
+            </Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter answer"
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
-              className="my-2"
+              className="my-2 rounded-0 "
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="solution">
+            <Form.Label
+              className="my-0"
+              style={{ marginBottom: "0px !important" }}
+            >
+              Solution
+            </Form.Label>
+
             <Form.Control
               as="textarea"
               type="text"
@@ -274,7 +292,7 @@ const ProductEditScreen = () => {
             ></Form.Control>
           </Form.Group>
           <Button type="submit">
-            <FaPlusSquare /> Add Question
+            <FaPlusCircle /> Add Question
           </Button>
         </Form>
       </FormContainer>
