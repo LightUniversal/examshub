@@ -126,7 +126,7 @@ const ExamScreen = () => {
     });
     setTimerActive(false);
     setSeconds(0);
-    setMins(0)
+    setMinutes(0)
     clearInterval(questionsAnsweredRef.current);
   };
 
