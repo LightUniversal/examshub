@@ -172,8 +172,7 @@ main {
   }
   .time {
     width: 100% !important;
-    box-shadow: rgba(176, 176, 176, 0.2) 0px 1px 0px 0px;
-    border-bottom:thin solid rgba(189, 187, 187, 0.1);
+    box-shadow: rgba(176, 176, 176, 0.1) 0px 1px 0px 0px;
     border-radius: 0% !important;
     text-align: center;
   }

@@ -155,28 +155,28 @@ const ExamScreen = () => {
                   position: "fixed",
                   zIndex: "100",
                   top: "70px",
-                  backgroundColor: "rgb(255,255,255)",
+                  backgroundColor: "rgba(250,250,250, 1)",
                 }}
               >
                 {/* <span className=" text-center text-white">
                   <FaStopwatch />:
                 </span> */}
                 <div
-                  className=" px-2 py-1  text-success fw-bold hr"
+                  className=" px-2 py-1  text-success fw-medium hr"
                   style={{ borderRadius: "2px" }}
                 >
                   00 hr
                 </div>
                 :
                 <div
-                  className=" px-2 py-1  text-success fw-bold min"
+                  className=" px-2 py-1  text-success fw-medium min"
                   style={{ borderRadius: "2px" }}
                 >
                   {minutes} mins
                 </div>
                 :
                 <div
-                  className=" px-2 py-1  text-success fw-bold sec"
+                  className=" px-2 py-1  text-success fw-medium sec"
                   style={{ borderRadius: "2px" }}
                 >
                   {seconds} sec
@@ -490,10 +490,10 @@ const ExamScreen = () => {
             </Form>
             <Modal show={show} onHide={handleClose}>
               <Modal.Header>
-                <Modal.Title className=" w-100 text-center ">
+                <Modal.Title className=" w-100 text-left ">
                   <p
-                    className=" bg-dark-subtle px-3 py-2 w-100 fw-light "
-                    style={{ fontSize: "16px" }}
+                    className=" bg-dark text-success px-3 py-2 w-100 fw-light "
+                    style={{ fontSize: "15px" }}
                   >
                     {question}
                   </p>
@@ -502,19 +502,19 @@ const ExamScreen = () => {
               <Modal.Body>
                 <p
                   className="px-4 py-1 "
-                  style={{ lineHeight: "40px", textAlign: "justify" }}
+                  style={{ lineHeight: "30px", textAlign: "left" }}
                 >
                   {solution}
                 </p>
                 <strong
-                  className="px-2 py-2 mx-4"
+                  className="px-2 py-2 mx-4 bg-success text-white"
                   style={{ backgroundColor: "rgba(200, 200, 200, 0.6)" }}
                 >
                   Answer: {answer}
                 </strong>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="danger" onClick={handleClose} className=" text-white ">
                   Close
                 </Button>
               </Modal.Footer>
