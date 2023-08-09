@@ -50,7 +50,7 @@ const ExamScreen = () => {
   const { data: product, isLoading, error } = useGetProductQuery(productId);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
-  const [mode, setMode] = useState("Learning");
+  const [mode, setMode] = useState("Exam");
   console.log(mode);
   let mins = 0;
   const questionsAnsweredRef = useRef(0);
@@ -265,7 +265,7 @@ const ExamScreen = () => {
                   </Form.Control>
                 </Form.Group>
               </div>
-              {mode === "Learning"
+              {mode === "Exam"
                 ? (
                     product.questions.map((question, i) => (
                       <Form.Group
