@@ -17,10 +17,6 @@ const questionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  topic: {
-    type: String,
-    required: true,
-  },
 });
 const reviewSchema = new mongoose.Schema(
   {
