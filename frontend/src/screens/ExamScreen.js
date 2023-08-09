@@ -66,7 +66,7 @@ const ExamScreen = () => {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
         prevSeconds + 1;
-        if (prevSeconds === 10) {
+        if (prevSeconds === 60) {
           prevSeconds = 0;
           // mins+=1
           setMinutes((minutes) => {
@@ -75,11 +75,9 @@ const ExamScreen = () => {
 
           console.log(minutes);
         }
-        if (minutes == 1) {
-          setMinutes((minutes) => {
-            return minutes = 0
-          })
-          return prevSeconds = 0;
+        if (minutes == 30) {
+          clearInterval(interval);
+          return (prevSeconds = 0);
         }
         return prevSeconds + 1;
       });
@@ -91,6 +89,19 @@ const ExamScreen = () => {
     questionsAnsweredRef.current = interval;
   };
 
+  useEffect(() => {
+    // setMinutes(minutes - 1);
+    if (minutes >= 30) {
+      setSeconds(0);
+      setMinutes(0);
+      setScore(score);
+      clearInterval(questionsAnsweredRef.current);
+      document.querySelector("#form").classList.add("d-none");
+      document.querySelector(".score span").textContent = `${showScore}%`;
+      document.querySelector(".score").classList.remove("d-none");
+      document.querySelector(".startBtn").classList.remove("d-none");
+    }
+  }, [minutes, seconds]);
   // Get and display soltuions
   const getSolution = (e, { question, answer, solution }) => {
     e.preventDefault();
@@ -127,11 +138,12 @@ const ExamScreen = () => {
         document.querySelector(".words").classList.remove("d-none");
         document.querySelector(".score").classList.remove("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
-        setScore(showScore)
-        console.log(score)
+        setScore(showScore);
+        console.log(score);
       } else {
         document.querySelector("#form").classList.add("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
+        document.querySelector(".startBtn").classList.remove("d-none");
         document.querySelector(".score").classList.remove("d-none");
       }
     });
@@ -207,15 +219,15 @@ const ExamScreen = () => {
             </Col>
             <div className="words w-75 mx-auto  d-none text-right">
               {Number(score >= 70) ? (
-                <Col className=" text-left px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-success ">
+                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-success ">
                   {words[0]}
                 </Col>
-              ) : (Number(score) >= 50 && Number(score) <= 69) ? (
-                <Col className=" text-left px-4 py-3 fw-medium   shadow-sm rounded-1 text-white bg-info  ">
+              ) : Number(score) >= 50 && Number(score) <= 69 ? (
+                <Col className=" text-center px-4 py-3 fw-medium   shadow-sm rounded-1 text-white bg-info  ">
                   {words[1]}
                 </Col>
               ) : (
-                <Col className=" text-left px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-danger ">
+                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-danger ">
                   {words[2]}
                 </Col>
               )}
@@ -269,117 +281,115 @@ const ExamScreen = () => {
                 </Form.Group>
               </div>
               {mode === "Exam"
-                ? (
-                    product.questions.map((question, i) => (
-                      <Form.Group
-                        controlId={question.topic}
-                        key={i}
-                        className="question__  "
+                ? product.questions.map((question, i) => (
+                    <Form.Group
+                      controlId={question.topic}
+                      key={i}
+                      className="question__  "
+                    >
+                      <ListGroup
+                        id="question"
+                        className=" shadow-sm p-3 my-2"
+                        type="none"
                       >
-                        <ListGroup
-                          id="question"
-                          className=" shadow-sm p-3 my-2"
-                          type="none"
-                        >
-                          <p className="question_ py-4  ">
-                            <span
-                              className="mx-2 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
-                              style={{ left: "0px", top: "15px" }}
-                            >
-                              <FaQuestionCircle
-                                className=" text-success mx-1 "
-                                style={{ position: "relative", top: "-1.5px" }}
-                              />
-                              -{i + 1}
-                            </span>
-                            <span className="mx-2 px-3 text-justify fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
-                              {question.question.trim()}
-                            </span>
-                          </p>
+                        <p className="question_ py-4  ">
+                          <span
+                            className="mx-2 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
+                            style={{ left: "0px", top: "15px" }}
+                          >
+                            <FaQuestionCircle
+                              className=" text-success mx-1 "
+                              style={{ position: "relative", top: "-1.5px" }}
+                            />
+                            -{i + 1}
+                          </span>
+                          <span className="mx-2 px-3 text-justify fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
+                            {question.question.trim()}
+                          </span>
+                        </p>
 
-                          <li>
-                            <input
-                              type="radio"
-                              id={(question.options[0] + `${i}`).trim()}
-                              name={question.topic}
-                              className=""
-                              value={question.options[0]}
+                        <li>
+                          <input
+                            type="radio"
+                            id={(question.options[0] + `${i}`).trim()}
+                            name={question.topic}
+                            className=""
+                            value={question.options[0]}
+                          />
+                          <label
+                            htmlFor={(question.options[0] + `${i}`).trim()}
+                          >
+                            {question.options[0]}
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="radio"
+                            id={(question.options[1] + `${i}`).trim()}
+                            name={question.topic}
+                            value={question.options[1]}
+                          />
+                          <label
+                            htmlFor={(question.options[1] + `${i}`).trim()}
+                          >
+                            {question.options[1]}
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="radio"
+                            id={(question.options[2] + `${i}`).trim()}
+                            name={question.topic}
+                            value={question.options[2]}
+                          />
+                          <label
+                            htmlFor={(question.options[2] + `${i}`).trim()}
+                          >
+                            {question.options[2]}
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="radio"
+                            id={(question.options[3] + `${i}`).trim()}
+                            name={question.topic}
+                            value={question.options[3]}
+                          />
+                          <label
+                            htmlFor={(question.options[3] + `${i}`).trim()}
+                          >
+                            {question.options[3]}
+                          </label>
+                        </li>
+                        <div className="actions flex justify-between">
+                          <button
+                            className="submit border-0 bg-danger rounded-1 text-white px-3 py-2"
+                            onClick={(e) => handleStopTimer(e)}
+                          >
+                            Submit
+                            <FaStopCircle
+                              style={{ position: "relative", top: "-2px" }}
+                              className=" text-white mx-1 text-success"
                             />
-                            <label
-                              htmlFor={(question.options[0] + `${i}`).trim()}
-                            >
-                              {question.options[0]}
-                            </label>
-                          </li>
-                          <li>
-                            <input
-                              type="radio"
-                              id={(question.options[1] + `${i}`).trim()}
-                              name={question.topic}
-                              value={question.options[1]}
+                          </button>
+                          <button
+                            className="next shadow d-none px-3 py-2 bg-success text-white rounded-1 "
+                            onClick={(e) =>
+                              getSolution(e, {
+                                question: question.question,
+                                hint: question.hint,
+                              })
+                            }
+                          >
+                            Solution
+                            <FaInfoCircle
+                              style={{ position: "relative", top: "-1.5px" }}
                             />
-                            <label
-                              htmlFor={(question.options[1] + `${i}`).trim()}
-                            >
-                              {question.options[1]}
-                            </label>
-                          </li>
-                          <li>
-                            <input
-                              type="radio"
-                              id={(question.options[2] + `${i}`).trim()}
-                              name={question.topic}
-                              value={question.options[2]}
-                            />
-                            <label
-                              htmlFor={(question.options[2] + `${i}`).trim()}
-                            >
-                              {question.options[2]}
-                            </label>
-                          </li>
-                          <li>
-                            <input
-                              type="radio"
-                              id={(question.options[3] + `${i}`).trim()}
-                              name={question.topic}
-                              value={question.options[3]}
-                            />
-                            <label
-                              htmlFor={(question.options[3] + `${i}`).trim()}
-                            >
-                              {question.options[3]}
-                            </label>
-                          </li>
-                          <div className="actions flex justify-between">
-                            <button
-                              className="submit border-0 bg-danger rounded-1 text-white px-3 py-2"
-                              onClick={(e) => handleStopTimer(e)}
-                            >
-                              Submit
-                              <FaStopCircle
-                                style={{ position: "relative", top: "-2px" }}
-                                className=" text-white mx-1 text-success"
-                              />
-                            </button>
-                            <button
-                              className="next shadow d-none px-3 py-2 bg-success text-white rounded-1 "
-                              onClick={(e) =>
-                                getSolution(e, {
-                                  question: question.question,
-                                  hint: question.hint,
-                                })
-                              }
-                            >
-                              Solution
-                              <FaInfoCircle
-                                style={{ position: "relative", top: "-1.5px" }}
-                              />
-                            </button>
-                          </div>
-                        </ListGroup>
-                      </Form.Group>
-                    ))
-                  )
+                          </button>
+                        </div>
+                      </ListGroup>
+                    </Form.Group>
+                  ))
                 : product.questions.map((question, i) => (
                     <Form.Group
                       controlId={question.topic}
@@ -517,7 +527,11 @@ const ExamScreen = () => {
                 </strong>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="danger" onClick={handleClose} className=" text-white ">
+                <Button
+                  variant="danger"
+                  onClick={handleClose}
+                  className=" text-white "
+                >
                   Close
                 </Button>
               </Modal.Footer>
