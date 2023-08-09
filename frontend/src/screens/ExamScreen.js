@@ -212,7 +212,7 @@ const ExamScreen = () => {
                   {words[1]}
                 </Col>
               ) : (
-                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-danger bg-danger ">
+                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-danger ">
                   {words[2]}
                 </Col>
               )}
