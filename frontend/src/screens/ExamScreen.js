@@ -66,17 +66,20 @@ const ExamScreen = () => {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
         prevSeconds + 1;
-        if (prevSeconds === 60) {
+        if (prevSeconds === 10) {
           prevSeconds = 0;
           // mins+=1
           setMinutes((minutes) => {
             return minutes + 1 - 1 + 1;
           });
 
-          console.log(mins);
+          console.log(minutes);
         }
-        if (mins == 30) {
-          return 0;
+        if (minutes == 1) {
+          setMinutes((minutes) => {
+            return minutes = 0
+          })
+          return prevSeconds = 0;
         }
         return prevSeconds + 1;
       });
@@ -204,15 +207,15 @@ const ExamScreen = () => {
             </Col>
             <div className="words w-75 mx-auto  d-none text-right">
               {Number(score >= 70) ? (
-                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-success ">
+                <Col className=" text-left px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-success ">
                   {words[0]}
                 </Col>
               ) : (Number(score) >= 50 && Number(score) <= 69) ? (
-                <Col className=" text-center px-4 py-3 fw-medium   shadow-sm rounded-1 text-white bg-info  ">
+                <Col className=" text-left px-4 py-3 fw-medium   shadow-sm rounded-1 text-white bg-info  ">
                   {words[1]}
                 </Col>
               ) : (
-                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-danger ">
+                <Col className=" text-left px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-danger ">
                   {words[2]}
                 </Col>
               )}
