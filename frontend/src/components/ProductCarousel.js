@@ -14,7 +14,7 @@ const ProductCarousel = () => {
       {materials.map(material => (
         <Carousel.Item key={material._id}>
           <Link to={`/product/${material._id}`}>
-            <Image src={material.image} alt={material.name} width="100%" className="mb-5" />
+            <Image src={material.image} alt={material.name} width="100%" className="mb-3" />
             <Carousel.Caption className=" carousel-caption ">
               <h3 className="px-3 mt-0">
                 {material.name} (&#x20A6;{material.price})
