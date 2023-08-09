@@ -172,7 +172,8 @@ main {
   }
   .time {
     width: 100% !important;
-    border-bottom:thin solid rgba(104, 101, 101, 0.4);
+    border-bottom:thin solid rgba(104, 101, 101, 0.1);
+    border-radius: 0% !important;
     text-align: center;
   }
 }

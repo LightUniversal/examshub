@@ -26,14 +26,15 @@ import Message from "../components/Message";
 
 const ExamScreen = () => {
   let showScore = 0;
+  const [score, setScore] = useState(0);
   const [show, setShow] = useState(false);
 
   //
-  const words = [
-    "Good, remember, proper preparation, through practice promotes excellent results!",
+  const [words, setWords] = useState([
+    "Good, remember, proper preparation, through practice promotes excellent results! Press Further...",
     "Excellent! Practice more to get familiar with questions",
     "You did'nt apply the principles for solving each questions. Go and Learn",
-  ];
+  ]);
   // close Modal
   const handleClose = () => setShow(false);
 
@@ -49,6 +50,8 @@ const ExamScreen = () => {
   const { data: product, isLoading, error } = useGetProductQuery(productId);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
+  const [mode, setMode] = useState("Learning");
+  console.log(mode);
   let mins = 0;
   const questionsAnsweredRef = useRef(0);
 
@@ -67,10 +70,10 @@ const ExamScreen = () => {
           prevSeconds = 0;
           // mins+=1
           setMinutes((minutes) => {
-            return (minutes + 1)-1 + 1
-          })
+            return minutes + 1 - 1 + 1;
+          });
 
-          console.log(mins)
+          console.log(mins);
         }
         if (mins == 30) {
           return 0;
@@ -85,14 +88,11 @@ const ExamScreen = () => {
     questionsAnsweredRef.current = interval;
   };
 
-  
   // Get and display soltuions
-  const getSolution = (e, { question, answer, solution}) => {
+  const getSolution = (e, { question, answer, solution }) => {
     e.preventDefault();
     setShow(true);
-    setAnswer(answer),
-    setSolution(solution),
-    setQuestion(question)
+    setAnswer(answer), setSolution(solution), setQuestion(question);
   };
 
   // Get all the inputs elements
@@ -102,6 +102,11 @@ const ExamScreen = () => {
     product.questions.map((quest) => {
       return quest.answer;
     });
+
+  // select Mode
+  const selectModeHandler = (e) => {
+    e.preventDefault();
+  };
   // Submit questions
   const handleStopTimer = (e) => {
     e.preventDefault();
@@ -111,7 +116,7 @@ const ExamScreen = () => {
         // console.log(input, rightAns[0].trim())
         rightAns.forEach((ans) => {
           if (ans.trim() === input.value.trim()) {
-            showScore += Number(100 / Number(product.questions.length)) ;
+            showScore += Number(100 / Number(product.questions.length));
           }
         });
         document.querySelector("#form").classList.add("d-none");
@@ -119,6 +124,8 @@ const ExamScreen = () => {
         document.querySelector(".words").classList.remove("d-none");
         document.querySelector(".score").classList.remove("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
+        setScore(showScore)
+        console.log(score)
       } else {
         document.querySelector("#form").classList.add("d-none");
         document.querySelector(".score span").textContent = `${showScore}%`;
@@ -127,7 +134,7 @@ const ExamScreen = () => {
     });
     setTimerActive(false);
     setSeconds(0);
-    setMinutes(0)
+    setMinutes(0);
     clearInterval(questionsAnsweredRef.current);
   };
 
@@ -154,15 +161,24 @@ const ExamScreen = () => {
                 {/* <span className=" text-center text-white">
                   <FaStopwatch />:
                 </span> */}
-                <div className=" px-2 py-1  text-dark fw-bold hr" style={{ borderRadius:"2px" }}>
+                <div
+                  className=" px-2 py-1  text-success fw-bold hr"
+                  style={{ borderRadius: "2px" }}
+                >
                   00 hr
                 </div>
                 :
-                <div className=" px-2 py-1  text-dark fw-bold min" style={{ borderRadius:"2px" }}>
+                <div
+                  className=" px-2 py-1  text-success fw-bold min"
+                  style={{ borderRadius: "2px" }}
+                >
                   {minutes} mins
                 </div>
                 :
-                <div className=" px-2 py-1  text-dark fw-bold sec" style={{  borderRadius:"2px" }}>
+                <div
+                  className=" px-2 py-1  text-success fw-bold sec"
+                  style={{ borderRadius: "2px" }}
+                >
                   {seconds} sec
                 </div>
               </div>
@@ -186,17 +202,17 @@ const ExamScreen = () => {
                 <FaHourglassStart /> Start
               </Button>
             </Col>
-            <div className="words d-none text-center">
-              {showScore >= 70 ? (
-                <Col className=" text-center px-4 py-2 fw-medium   shadow-sm rounded-1 text-green">
+            <div className="words w-75 mx-auto  d-none text-right">
+              {Number(score >= 70) ? (
+                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-success ">
                   {words[0]}
                 </Col>
-              ) : showScore >= 50 ? (
-                <Col className=" text-center px-4 py-2 fw-medium   shadow-sm rounded-1 text-bg-info ">
+              ) : (Number(score) >= 50 && Number(score) <= 69) ? (
+                <Col className=" text-center px-4 py-3 fw-medium   shadow-sm rounded-1 text-white bg-info  ">
                   {words[1]}
                 </Col>
               ) : (
-                <Col className=" text-center px-4 py-2 fw-medium shadow-sm rounded-1 text-danger">
+                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-danger bg-danger ">
                   {words[2]}
                 </Col>
               )}
@@ -222,125 +238,255 @@ const ExamScreen = () => {
                   style={{ background: "rgba(2,0,10,0.1)" }}
                 ></Form.Control>
               </Form.Group>
-              {/* <Form.Group controlId="exammode" className=" text-center my-2 shadow-sm  py-2  "> */}
-              {/* <Form.Label
-                  className=" fw-medium shadow py-3 px-3 text-white rounded-1  mx-1"
-                  style={{ background: "rgba(0,0,0,0.51)" }}
-                >
-                  Question-Mode
-                  <FaBookReader
-                    style={{ position: "relative", top: "-2px" }}
-                    className=" text-white mx-1 text-success"
-                  />
-                </Form.Label> */}
-                {/* <Form.Control
-                  as="select"
-                  value={mode}
-                  onChange={(e) => setMode(e.target.value)}
-                  className="subject shadow-sm fw-medium text-dark mx-1 "
-                  style={{ background: "rgba(2,0,10,0.1)" }}
-                >
-                  <option value="Learning Mode">Learning Mode</option>
-                  <option value="Exam Mode">Exam Mode </option>
-                </Form.Control>
-              </Form.Group> */}
-
-              {product.questions.map((question, i) => (
+              <div className="mode">
                 <Form.Group
-                  controlId={question.topic}
-                  key={i}
-                  className="question__  "
+                  controlId="exammode"
+                  className=" text-center mode my-2   py-2  "
                 >
-                  <ListGroup
-                    id="question"
-                    className=" shadow-sm p-3 my-2"
-                    type="none"
+                  <Form.Label
+                    className=" fw-medium shadow py-3 px-3 text-white rounded-1  mx-1"
+                    style={{ background: "rgba(0,0,0,0.51)" }}
                   >
-                    <p className="question_ py-4  ">
-                      <span
-                        className="mx-2 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
-                        style={{ left: "0px", top: "15px" }}
-                      >
-                        <FaQuestionCircle
-                          className=" text-success mx-1 "
-                          style={{ position: "relative", top: "-1.5px" }}
-                        />
-                        -{i + 1}
-                      </span>
-                      <span className="mx-2 px-3 text-justify fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
-                        {question.question.trim()}
-                      </span>
-                    </p>
-
-                    <li>
-                      <input
-                        type="radio"
-                        id={(question.options[0] + `${i}`).trim()}
-                        name={question.topic}
-                        className=""
-                        value={question.options[0]}
-                      />
-                      <label htmlFor={(question.options[0] + `${i}`).trim()}>
-                        {question.options[0]}
-                      </label>
-                    </li>
-                    <li>
-                      <input
-                        type="radio"
-                        id={(question.options[1] + `${i}`).trim()}
-                        name={question.topic}
-                        value={question.options[1]}
-                      />
-                      <label htmlFor={(question.options[1] + `${i}`).trim()}>
-                        {question.options[1]}
-                      </label>
-                    </li>
-                    <li>
-                      <input
-                        type="radio"
-                        id={(question.options[2] + `${i}`).trim()}
-                        name={question.topic}
-                        value={question.options[2]}
-                      />
-                      <label htmlFor={(question.options[2] + `${i}`).trim()}>
-                        {question.options[2]}
-                      </label>
-                    </li>
-                    <li>
-                      <input
-                        type="radio"
-                        id={(question.options[3] + `${i}`).trim()}
-                        name={question.topic}
-                        value={question.options[3]}
-                      />
-                      <label htmlFor={(question.options[3] + `${i}`).trim()}>
-                        {question.options[3]}
-                      </label>
-                    </li>
-                    <div className="actions flex justify-between">
-                      <button
-                        className="submit border-0 bg-danger rounded-1 text-white px-3 py-2"
-                        onClick={(e) => handleStopTimer(e)}
-                      >
-                        Submit <FaStopCircle style={{ position: "relative", top: "-2px" }}
-                    className=" text-white mx-1 text-success" />
-                      </button>
-                      <button
-                        className="next shadow px-3 py-2 bg-success text-white rounded-1 "
-                        onClick={(e) =>
-                          getSolution(e, {
-                            question: question.question,
-                            answer: question.answer,
-                            solution: question.solution,
-                          })
-                        }
-                      >
-                        Solution <FaInfoCircle  style={{ position: "relative", top: "-1.5px" }}/>
-                      </button>
-                    </div>
-                  </ListGroup>
+                    Question-Mode
+                    <FaBookReader
+                      style={{ position: "relative", top: "-2px" }}
+                      className=" text-white mx-1 text-success"
+                    />
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={mode}
+                    onChange={(e) => setMode(e.target.value)}
+                    className="subject shadow-sm fw-medium text-dark mx-1 "
+                    style={{ background: "rgba(2,0,10,0.1)" }}
+                  >
+                    <option value="Learning">Learning Mode</option>
+                    <option value="Exam">Exam Mode </option>
+                  </Form.Control>
                 </Form.Group>
-              ))}
+              </div>
+              {mode === "Learning"
+                ? (
+                    product.questions.map((question, i) => (
+                      <Form.Group
+                        controlId={question.topic}
+                        key={i}
+                        className="question__  "
+                      >
+                        <ListGroup
+                          id="question"
+                          className=" shadow-sm p-3 my-2"
+                          type="none"
+                        >
+                          <p className="question_ py-4  ">
+                            <span
+                              className="mx-2 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
+                              style={{ left: "0px", top: "15px" }}
+                            >
+                              <FaQuestionCircle
+                                className=" text-success mx-1 "
+                                style={{ position: "relative", top: "-1.5px" }}
+                              />
+                              -{i + 1}
+                            </span>
+                            <span className="mx-2 px-3 text-justify fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
+                              {question.question.trim()}
+                            </span>
+                          </p>
+
+                          <li>
+                            <input
+                              type="radio"
+                              id={(question.options[0] + `${i}`).trim()}
+                              name={question.topic}
+                              className=""
+                              value={question.options[0]}
+                            />
+                            <label
+                              htmlFor={(question.options[0] + `${i}`).trim()}
+                            >
+                              {question.options[0]}
+                            </label>
+                          </li>
+                          <li>
+                            <input
+                              type="radio"
+                              id={(question.options[1] + `${i}`).trim()}
+                              name={question.topic}
+                              value={question.options[1]}
+                            />
+                            <label
+                              htmlFor={(question.options[1] + `${i}`).trim()}
+                            >
+                              {question.options[1]}
+                            </label>
+                          </li>
+                          <li>
+                            <input
+                              type="radio"
+                              id={(question.options[2] + `${i}`).trim()}
+                              name={question.topic}
+                              value={question.options[2]}
+                            />
+                            <label
+                              htmlFor={(question.options[2] + `${i}`).trim()}
+                            >
+                              {question.options[2]}
+                            </label>
+                          </li>
+                          <li>
+                            <input
+                              type="radio"
+                              id={(question.options[3] + `${i}`).trim()}
+                              name={question.topic}
+                              value={question.options[3]}
+                            />
+                            <label
+                              htmlFor={(question.options[3] + `${i}`).trim()}
+                            >
+                              {question.options[3]}
+                            </label>
+                          </li>
+                          <div className="actions flex justify-between">
+                            <button
+                              className="submit border-0 bg-danger rounded-1 text-white px-3 py-2"
+                              onClick={(e) => handleStopTimer(e)}
+                            >
+                              Submit
+                              <FaStopCircle
+                                style={{ position: "relative", top: "-2px" }}
+                                className=" text-white mx-1 text-success"
+                              />
+                            </button>
+                            <button
+                              className="next shadow d-none px-3 py-2 bg-success text-white rounded-1 "
+                              onClick={(e) =>
+                                getSolution(e, {
+                                  question: question.question,
+                                  hint: question.hint,
+                                })
+                              }
+                            >
+                              Solution
+                              <FaInfoCircle
+                                style={{ position: "relative", top: "-1.5px" }}
+                              />
+                            </button>
+                          </div>
+                        </ListGroup>
+                      </Form.Group>
+                    ))
+                  )
+                : product.questions.map((question, i) => (
+                    <Form.Group
+                      controlId={question.topic}
+                      key={i}
+                      className="question__  "
+                    >
+                      <ListGroup
+                        id="question"
+                        className=" shadow-sm p-3 my-2"
+                        type="none"
+                      >
+                        <p className="question_ py-4  ">
+                          <span
+                            className="mx-2 px-2 fw-bold  text-success d-inline py-1 my-1 rounded"
+                            style={{ left: "0px", top: "15px" }}
+                          >
+                            <FaQuestionCircle
+                              className=" text-success mx-1 "
+                              style={{ position: "relative", top: "-1.5px" }}
+                            />
+                            -{i + 1}
+                          </span>
+                          <span className="mx-2 px-3 text-justify fw-medium d-inline-block py-4 my-1 shadow-sm rounded">
+                            {question.question.trim()}
+                          </span>
+                        </p>
+
+                        <li>
+                          <input
+                            type="radio"
+                            id={(question.options[0] + `${i}`).trim()}
+                            name={question.topic}
+                            className=""
+                            value={question.options[0]}
+                          />
+                          <label
+                            htmlFor={(question.options[0] + `${i}`).trim()}
+                          >
+                            {question.options[0]}
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="radio"
+                            id={(question.options[1] + `${i}`).trim()}
+                            name={question.topic}
+                            value={question.options[1]}
+                          />
+                          <label
+                            htmlFor={(question.options[1] + `${i}`).trim()}
+                          >
+                            {question.options[1]}
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="radio"
+                            id={(question.options[2] + `${i}`).trim()}
+                            name={question.topic}
+                            value={question.options[2]}
+                          />
+                          <label
+                            htmlFor={(question.options[2] + `${i}`).trim()}
+                          >
+                            {question.options[2]}
+                          </label>
+                        </li>
+                        <li>
+                          <input
+                            type="radio"
+                            id={(question.options[3] + `${i}`).trim()}
+                            name={question.topic}
+                            value={question.options[3]}
+                          />
+                          <label
+                            htmlFor={(question.options[3] + `${i}`).trim()}
+                          >
+                            {question.options[3]}
+                          </label>
+                        </li>
+                        <div className="actions flex justify-between">
+                          <button
+                            className="submit border-0 bg-danger rounded-1 text-white px-3 py-2"
+                            onClick={(e) => handleStopTimer(e)}
+                          >
+                            Submit
+                            <FaStopCircle
+                              style={{ position: "relative", top: "-2px" }}
+                              className=" text-white mx-1 text-success"
+                            />
+                          </button>
+                          <button
+                            className="next shadow px-3 py-2 bg-success text-white rounded-1 "
+                            onClick={(e) =>
+                              getSolution(e, {
+                                question: question.question,
+                                answer: question.answer,
+                                solution: question.solution,
+                              })
+                            }
+                          >
+                            Hint
+                            <FaInfoCircle
+                              style={{ position: "relative", top: "-1.5px" }}
+                            />
+                          </button>
+                        </div>
+                      </ListGroup>
+                    </Form.Group>
+                  ))}
             </Form>
             <Modal show={show} onHide={handleClose}>
               <Modal.Header>
