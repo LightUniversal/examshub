@@ -170,7 +170,7 @@ const ExamScreen = () => {
                   position: "fixed",
                   zIndex: "100",
                   top: "70px",
-                  backgroundColor: "rgba(255, 254, 254, 1)",
+                  backgroundColor: "rgba(255, 254, 254, 0.8)",
                 }}
               >
                 {/* <span className=" text-center text-white">
