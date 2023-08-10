@@ -66,7 +66,7 @@ const ExamScreen = () => {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
         prevSeconds + 1;
-        if (prevSeconds === 60) {
+        if (prevSeconds === 59) {
           prevSeconds = 0;
           // mins+=1
           setMinutes((minutes) => {
@@ -165,7 +165,7 @@ const ExamScreen = () => {
               style={{ display: "flex", justifyContent: "space-around" }}
             >
               <div
-                className="  time px-3 rounded-1 py-1 "
+                className="  time px-3 rounded-1 py-1"
                 style={{
                   position: "fixed",
                   zIndex: "100",
@@ -177,21 +177,21 @@ const ExamScreen = () => {
                   <FaStopwatch />:
                 </span> */}
                 <div
-                  className=" px-2 py-1  text-success fw-medium hr"
+                  className=" px-2 py-1  text-dark fw-medium hr"
                   style={{ borderRadius: "2px" }}
                 >
                   00 hr
                 </div>
                 :
                 <div
-                  className=" px-2 py-1  text-success fw-medium min"
+                  className=" px-2 py-1  text-dark fw-medium min"
                   style={{ borderRadius: "2px" }}
                 >
                   {minutes} mins
                 </div>
                 :
                 <div
-                  className=" px-2 py-1  text-success fw-medium sec"
+                  className=" px-2 py-1  text-dark fw-medium sec"
                   style={{ borderRadius: "2px" }}
                 >
                   {seconds} sec
@@ -283,7 +283,7 @@ const ExamScreen = () => {
               {mode === "Exam"
                 ? product.questions.map((question, i) => (
                     <Form.Group
-                      controlId={question.topic}
+                      controlId={`question${i}`}
                       key={i}
                       className="question__  "
                     >
@@ -311,13 +311,13 @@ const ExamScreen = () => {
                         <li>
                           <input
                             type="radio"
-                            id={(question.options[0] + `${i}`).trim()}
-                            name={question.topic}
+                            id={question._id + `${question.options[0]}`}
+                            name={`question${i}`}
                             className=""
                             value={question.options[0]}
                           />
                           <label
-                            htmlFor={(question.options[0] + `${i}`).trim()}
+                            htmlFor={question._id + `${question.options[0]}`}
                           >
                             {question.options[0]}
                           </label>
@@ -325,12 +325,12 @@ const ExamScreen = () => {
                         <li>
                           <input
                             type="radio"
-                            id={(question.options[1] + `${i}`).trim()}
-                            name={question.topic}
+                            id={question._id + `${question.options[1]}`}
+                            name={`question${i}`}
                             value={question.options[1]}
                           />
                           <label
-                            htmlFor={(question.options[1] + `${i}`).trim()}
+                            htmlFor={question._id + `${question.options[1]}`}
                           >
                             {question.options[1]}
                           </label>
@@ -338,12 +338,12 @@ const ExamScreen = () => {
                         <li>
                           <input
                             type="radio"
-                            id={(question.options[2] + `${i}`).trim()}
-                            name={question.topic}
+                            id={question._id + `${question.options[2]}`}
+                            name={`question${i}`}
                             value={question.options[2]}
                           />
                           <label
-                            htmlFor={(question.options[2] + `${i}`).trim()}
+                            htmlFor={question._id + `${question.options[2]}`}
                           >
                             {question.options[2]}
                           </label>
@@ -351,12 +351,12 @@ const ExamScreen = () => {
                         <li>
                           <input
                             type="radio"
-                            id={(question.options[3] + `${i}`).trim()}
-                            name={question.topic}
+                            id={question._id + `${question.options[3]}`}
+                            name={`question${i}`}
                             value={question.options[3]}
                           />
                           <label
-                            htmlFor={(question.options[3] + `${i}`).trim()}
+                            htmlFor={question._id + `${question.options[3]}`}
                           >
                             {question.options[3]}
                           </label>
@@ -392,7 +392,7 @@ const ExamScreen = () => {
                   ))
                 : product.questions.map((question, i) => (
                     <Form.Group
-                      controlId={question.topic}
+                      controlId={`question${i}`}
                       key={i}
                       className="question__  "
                     >
@@ -420,13 +420,13 @@ const ExamScreen = () => {
                         <li>
                           <input
                             type="radio"
-                            id={(question.options[0] + `${i}`).trim()}
-                            name={question.topic}
+                            id={question._id + `${question.options[0]}`}
+                            name={`question${i}`}
                             className=""
                             value={question.options[0]}
                           />
                           <label
-                            htmlFor={(question.options[0] + `${i}`).trim()}
+                            htmlFor={question._id + `${question.options[0]}`}
                           >
                             {question.options[0]}
                           </label>
@@ -434,12 +434,12 @@ const ExamScreen = () => {
                         <li>
                           <input
                             type="radio"
-                            id={(question.options[1] + `${i}`).trim()}
-                            name={question.topic}
+                            id={question._id + `${question.options[1]}`}
+                            name={`question${i}`}
                             value={question.options[1]}
                           />
                           <label
-                            htmlFor={(question.options[1] + `${i}`).trim()}
+                            htmlFor={question._id + `${question.options[1]}`}
                           >
                             {question.options[1]}
                           </label>
@@ -447,12 +447,12 @@ const ExamScreen = () => {
                         <li>
                           <input
                             type="radio"
-                            id={(question.options[2] + `${i}`).trim()}
-                            name={question.topic}
+                            id={question._id + `${question.options[2]}`}
+                            name={`question${i}`}
                             value={question.options[2]}
                           />
                           <label
-                            htmlFor={(question.options[2] + `${i}`).trim()}
+                            htmlFor={question._id + `${question.options[2]}`}
                           >
                             {question.options[2]}
                           </label>
@@ -460,12 +460,12 @@ const ExamScreen = () => {
                         <li>
                           <input
                             type="radio"
-                            id={(question.options[3] + `${i}`).trim()}
-                            name={question.topic}
+                            id={question._id + `${question.options[3]}`}
+                            name={`question${i}`}
                             value={question.options[3]}
                           />
                           <label
-                            htmlFor={(question.options[3] + `${i}`).trim()}
+                            htmlFor={question._id + `${question.options[3]}`}
                           >
                             {question.options[3]}
                           </label>
@@ -520,7 +520,7 @@ const ExamScreen = () => {
                   {solution}
                 </p>
                 <strong
-                  className="px-2 py-2 mx-4 bg-success text-white"
+                  className="px-3 py-3 mx-4 bg-dark text-success fw-medium shadow-sm rounded-1  d-inline-block "
                   style={{ backgroundColor: "rgba(200, 200, 200, 0.6)" }}
                 >
                   Answer: {answer}
