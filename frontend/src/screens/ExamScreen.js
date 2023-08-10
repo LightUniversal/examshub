@@ -165,7 +165,7 @@ const ExamScreen = () => {
               style={{ display: "flex", justifyContent: "space-around" }}
             >
               <div
-                className="  time px-3 rounded-1 py-1"
+                className="  time px-3 rounded-1 py-1 shadow-sm "
                 style={{
                   position: "fixed",
                   zIndex: "100",
@@ -177,21 +177,21 @@ const ExamScreen = () => {
                   <FaStopwatch />:
                 </span> */}
                 <div
-                  className=" px-2 py-1  text-dark fw-medium hr"
+                  className=" px-2 py-1  text-success fw-medium hr"
                   style={{ borderRadius: "2px" }}
                 >
                   00 hr
                 </div>
                 :
                 <div
-                  className=" px-2 py-1  text-dark fw-medium min"
+                  className=" px-2 py-1  text-success fw-medium min"
                   style={{ borderRadius: "2px" }}
                 >
                   {minutes} mins
                 </div>
                 :
                 <div
-                  className=" px-2 py-1  text-dark fw-medium sec"
+                  className=" px-2 py-1  text-success fw-medium sec"
                   style={{ borderRadius: "2px" }}
                 >
                   {seconds} sec
