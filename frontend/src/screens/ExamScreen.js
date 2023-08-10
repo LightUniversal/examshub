@@ -170,7 +170,7 @@ const ExamScreen = () => {
                   position: "fixed",
                   zIndex: "100",
                   top: "70px",
-                  backgroundColor: "rgba(250,250,250, 1)",
+                  backgroundColor: "rgba(255, 254, 254, 1)",
                 }}
               >
                 {/* <span className=" text-center text-white">
@@ -219,15 +219,15 @@ const ExamScreen = () => {
             </Col>
             <div className="words w-75 mx-auto  d-none text-right">
               {Number(score >= 70) ? (
-                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-success ">
+                <Col className=" text-left px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-success ">
                   {words[0]}
                 </Col>
               ) : Number(score) >= 50 && Number(score) <= 69 ? (
-                <Col className=" text-center px-4 py-3 fw-medium   shadow-sm rounded-1 text-white bg-info  ">
+                <Col className=" text-left px-4 py-3 fw-medium   shadow-sm rounded-1 text-white bg-info  ">
                   {words[1]}
                 </Col>
               ) : (
-                <Col className=" text-center px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-danger ">
+                <Col className=" text-left px-4 py-3 fw-medium shadow-sm rounded-1 text-white bg-danger ">
                   {words[2]}
                 </Col>
               )}
