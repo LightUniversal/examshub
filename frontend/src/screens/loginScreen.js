@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
-import { FaAddressBook, FaLock } from "react-icons/fa";
+import { FaAddressBook, FaGraduationCap, FaLock } from "react-icons/fa";
 import React from "react";
 import Loader from "../components/Loader";
 import { useLoginMutation } from "../slices/usersApiSlice";
@@ -48,8 +48,11 @@ const LoginScreen = () => {
   return (
     <div>
       <FormContainer>
+      <h1 className=" shadow-sm p-2 rounded-1 ">
+            Lupedia/Examhub <FaGraduationCap className=" text-success "/>
+        </h1>
         <Form onSubmit={submitHandler}>
-          <Form.Group controlId="email" className="my-3">
+          <Form.Group controlId="email" className="my-3 shadow-sm px-2 py-2 rounded-1">
             <Form.Label>
               Email Address <FaAddressBook className=" text-success " />
             </Form.Label>
@@ -58,9 +61,10 @@ const LoginScreen = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email"
+              className="p-2 rounded-0 "
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId="password" className="my-3">
+          <Form.Group controlId="password" className="my-3 shadow-sm px-2 py-2 rounded-1">
             <Form.Label>
               Password <FaLock className=" text-success " />
             </Form.Label>
@@ -69,6 +73,7 @@ const LoginScreen = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter password"
+              className="p-2 rounded-0 "
             ></Form.Control>
           </Form.Group>
 
