@@ -7,7 +7,7 @@ import { Table, Form, Button, Row, Col, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { useProfileMutation } from "../slices/usersApiSlice";
+import { useProfileMutation, useProfileImageMutation } from "../slices/usersApiSlice";
 import { useGetMyOrdersQuery } from "../slices/orderApiSlice";
 
 const ProfileScreen = () => {
@@ -22,6 +22,8 @@ const ProfileScreen = () => {
   const [profile, {isLoading:loadingUpdateProfile, error}] = useProfileMutation();
 
   const {data:orders, isLoading, isError} = useGetMyOrdersQuery();
+  const [updateProfileImage, {isLoading: loading, error: err}]= useProfileImageMutation();
+
   console.log(userinfo._id)
   useEffect(() => {
     if (userinfo) {
@@ -31,12 +33,25 @@ const ProfileScreen = () => {
     }
   }, [userinfo, userinfo.name, userinfo.email, userinfo.profile]);
 
+
+  const updateImageHandler = async(e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await updateProfileImage(formData).unwrap();
+      toast.success("Profile Image updated successfully");
+      setProfile(res.image);
+    } catch (error) {
+      toast.error(error?.data?.message || error.error);
+    }
+  }
+
   const submitHandler = async (e) => {
     e.preventDefault();
     
     if(password === confirmPassword) {
       try {
-        const res = await profile({_id: userinfo._id, name, email, password, profileImage}).unwrap();
+        const res = await profile({_id: userinfo._id, name, email, password, profile: profileImage}).unwrap();
         dispatch(setCredentials(res));
         toast.success("Profile Updated");
       } catch (error) {
@@ -77,13 +92,15 @@ const ProfileScreen = () => {
             <Form.Control type="password" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Enter password" className="py-3">
             </Form.Control>
           </Form.Group>
-          {/* <Form.Group controlId="password" className="my-2">
+          <Form.Group controlId="password" className="my-2">
             <Form.Label>
                 Profile Image
             </Form.Label>
-            <Form.Control type="file" value={profileImage} onChange={(e)=> setProfile(e.target.value)} placeholder="Enter profile url" className="py-3">
+            <Form.Control type="file" label="choose image" onChange={updateImageHandler} placeholder="Enter profile url" className="my-1 ">
             </Form.Control>
-          </Form.Group> */}
+            <Form.Control type="text" value={profileImage} onChange={(e)=> setProfile(e.target.value)} placeholder="Enter profile url" className="py-3">
+            </Form.Control>
+          </Form.Group>
           <Form.Group controlId="confirmpassword" className="my-2">
             <Form.Label>
               Confirm Password

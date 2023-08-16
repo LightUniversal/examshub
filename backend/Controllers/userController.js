@@ -95,8 +95,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   if(user) {
     // update only the name property of the user
+    console.log(req.body);
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.profile = req.body.profile || user.profile
+    // user.profile = req.body.
     if(req.body.password){
       user.password = req.body.password;
     }
@@ -109,6 +112,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       name: updatedUser.name,
       isAdmin: updatedUser.isAdmin,
+      profile: updatedUser.profile
+
     })
   } else {
     res.status(400);
@@ -170,7 +175,7 @@ const updateUser = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin
+      isAdmin: updatedUser.isAdmin,
     });
   } else {
     res.status(400);

@@ -78,7 +78,7 @@ const RegisterScreen = () => {
         {/* <h1 className=" shadow-sm p-2 rounded-1 ">
           Lupedia/Examhub <FaGraduationCap className=" text-success " />
         </h1> */}
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} className=" shadow-sm p-1 rounded-1 ">
           <Form.Group
             controlId="name"
             className="my-0 px-2 py-2 rounded-1  "
