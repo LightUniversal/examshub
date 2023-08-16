@@ -3,7 +3,7 @@ import { setCredentials } from "../slices/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { FaCheck, FaCheckCircle, FaGoodreads, FaTimes, FaUserPlus } from "react-icons/fa";
-import { Table, Form, Button, Row, Col } from "react-bootstrap";
+import { Table, Form, Button, Row, Col, Image } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -14,6 +14,7 @@ const ProfileScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [profileImage, setProfile] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
@@ -26,15 +27,16 @@ const ProfileScreen = () => {
     if (userinfo) {
       setName(userinfo.name);
       setEmail(userinfo.email);
+      setProfile(userinfo.profile);
     }
-  }, [userinfo, userinfo.name, userinfo.email]);
+  }, [userinfo, userinfo.name, userinfo.email, userinfo.profile]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
     
     if(password === confirmPassword) {
       try {
-        const res = await profile({_id: userinfo._id, name, email, password}).unwrap();
+        const res = await profile({_id: userinfo._id, name, email, password, profileImage}).unwrap();
         dispatch(setCredentials(res));
         toast.success("Profile Updated");
       } catch (error) {
@@ -50,8 +52,8 @@ const ProfileScreen = () => {
   return (
     <Row>
       <Col md={3}>
-        <h2>
-          User Profile <FaUserPlus />
+        <h2 className=" shadow-sm py-3  text-center  ">
+          User Profile <Image src={userinfo.profile} alt="Profile image" className=" shadow" style={{ width:"50px", borderRadius:"100px"}} />
         </h2>
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="my-2">
@@ -75,6 +77,13 @@ const ProfileScreen = () => {
             <Form.Control type="password" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Enter password" className="py-3">
             </Form.Control>
           </Form.Group>
+          {/* <Form.Group controlId="password" className="my-2">
+            <Form.Label>
+                Profile Image
+            </Form.Label>
+            <Form.Control type="file" value={profileImage} onChange={(e)=> setProfile(e.target.value)} placeholder="Enter profile url" className="py-3">
+            </Form.Control>
+          </Form.Group> */}
           <Form.Group controlId="confirmpassword" className="my-2">
             <Form.Label>
               Confirm Password
@@ -101,9 +110,6 @@ const ProfileScreen = () => {
             <thead>
               <tr>
                 <th>
-                 ORDER ID
-                </th>
-                <th>
                   DATE
                 </th>
                 <th>
@@ -120,9 +126,6 @@ const ProfileScreen = () => {
             <tbody>
               {orders.map((order)=> (
                 <tr key={order._id}>
-                  <td>
-                    {order._id}
-                  </td>
                   <td>
                     {order.createdAt.substring(0, 10)}
                   </td>

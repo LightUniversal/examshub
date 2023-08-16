@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import React from "react";
 import Loader from "../components/Loader";
-import { useRegisterMutation } from "../slices/usersApiSlice";
+import { useRegisterMutation, useProfileImageMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 
@@ -28,6 +28,7 @@ const RegisterScreen = () => {
   const navigate = useNavigate();
 
   const [register, { isLoading }] = useRegisterMutation();
+  const [profileImage, { isLoading: loadingProfileImage }] = useProfileImageMutation();
   const { userinfo } = useSelector((state) => state.auth);
 
   // Check for the redirect search parameter
@@ -48,7 +49,7 @@ const RegisterScreen = () => {
       toast.error("Passwords do not match");
     } else {
       try {
-        const res = await register({ email, password, name }).unwrap();
+        const res = await register({ email, password, name, imageUrl }).unwrap();
         // The unwrap extracts values
         dispatch(setCredentials({ ...res }));
         navigate(redirect);
@@ -58,18 +59,31 @@ const RegisterScreen = () => {
       }
     }
   };
+
+  // Profile Image
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await profileImage(formData).unwrap();
+      toast.success(res.message);
+      setImgUrl(res.image);
+    } catch (error) {
+      toast.error(error?.data?.message || error.error);
+    }
+  };
   return (
     <div>
       <FormContainer>
-        <h1 className=" shadow-sm p-2 rounded-1 ">
+        {/* <h1 className=" shadow-sm p-2 rounded-1 ">
           Lupedia/Examhub <FaGraduationCap className=" text-success " />
-        </h1>
+        </h1> */}
         <Form onSubmit={submitHandler}>
           <Form.Group
             controlId="name"
-            className="my-3 shadow-sm px-2 py-2 rounded-1  "
+            className="my-0 px-2 py-2 rounded-1  "
           >
-            <Form.Label>
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
               Name <FaUserPlus className=" text-success " />
             </Form.Label>
             <Form.Control
@@ -82,9 +96,9 @@ const RegisterScreen = () => {
           </Form.Group>
           <Form.Group
             controlId="email"
-            className="my-3 shadow-sm px-2 py-2 rounded-1"
+            className="my-1 px-2 py-2 rounded-1"
           >
-            <Form.Label>
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
               Email Address <FaAddressBook className=" text-success " />
             </Form.Label>
             <Form.Control
@@ -97,30 +111,31 @@ const RegisterScreen = () => {
           </Form.Group>
           <Form.Group
             controlId="imgurl"
-            className="my-3 shadow-sm px-2 py-2 rounded-1"
+            className="my-1 px-2 py-2 rounded-1"
           >
-            <Form.Label>
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
               Profile Image <FaImage className=" text-success " />
             </Form.Label>
-            <Form.Control
-              type="file"
-              value={imageUrl}
-              onChange={(e) => setImgUrl(e.target.value)}
-              className="p-2 rounded-0"
-            ></Form.Control>
             <Form.Control
               type="text"
               value={imageUrl}
               onChange={(e) => setImgUrl(e.target.value)}
-              placeholder="Enter email"
-              className="p-2 rounded-0 my-1 "
+              className="p-2 my-1  rounded-0"
+              placeholder="Enter image url"
             ></Form.Control>
+            <Form.Control
+              type="file"
+              label = "Choose file"
+              onChange={uploadFileHandler}
+              className="p-2 rounded-0"
+            ></Form.Control>
+            
           </Form.Group>
           <Form.Group
             controlId="password"
-            className="my-3 shadow-sm px-2 py-2 rounded-1"
+            className="my-1  px-2 py-2 rounded-1"
           >
-            <Form.Label>
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
               Password <FaLock className=" text-success" />
             </Form.Label>
             <Form.Control
@@ -133,9 +148,9 @@ const RegisterScreen = () => {
           </Form.Group>
           <Form.Group
             controlId="confirmpassword"
-            className="my-3 shadow-sm px-2 py-2 rounded-1"
+            className="my-1 px-2 py-2 rounded-1"
           >
-            <Form.Label>
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
               Confirm Password <FaLock className=" text-success " />
             </Form.Label>
             <Form.Control
@@ -150,7 +165,7 @@ const RegisterScreen = () => {
           <Button
             type="submit"
             variant="success"
-            className="my-3"
+            className="my-3 mx-2 rounded-1 "
             disabled={isLoading}
           >
             Register <FaUserPlus className="" />

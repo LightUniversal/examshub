@@ -1,5 +1,5 @@
 // Here we are making a get request with redux
-import { USERS_URL } from "../constants";
+import { IMAGEUPLOAD_URL, USERS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
@@ -22,6 +22,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         register: builder.mutation({
             query: (data) => ({
                 url: `${USERS_URL}`,
+                method: "POST",
+                body: data
+            })
+        }),
+        profileImage: builder.mutation({
+            query: (data) => ({
+                url: `${IMAGEUPLOAD_URL}/profileImage`,
                 method: "POST",
                 body: data
             })
@@ -64,4 +71,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 });
 
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useProfileMutation, useGetUsersQuery, useDeleteUserMutation, useGetUserDetailsQuery, useUpdateUserMutation } = usersApiSlice;
+export const { useLoginMutation, useLogoutMutation, useRegisterMutation, useProfileMutation, useGetUsersQuery, useDeleteUserMutation, useGetUserDetailsQuery, useUpdateUserMutation, useProfileImageMutation } = usersApiSlice;

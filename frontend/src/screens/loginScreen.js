@@ -48,12 +48,12 @@ const LoginScreen = () => {
   return (
     <div>
       <FormContainer>
-      <h1 className=" shadow-sm p-2 rounded-1 ">
+      {/* <h1 className=" shadow-sm p-2 rounded-1 ">
             Lupedia/Examhub <FaGraduationCap className=" text-success "/>
-        </h1>
+        </h1> */}
         <Form onSubmit={submitHandler}>
-          <Form.Group controlId="email" className="my-3 shadow-sm px-2 py-2 rounded-1">
-            <Form.Label>
+          <Form.Group controlId="email" className="my-1 px-2 py-2 rounded-1">
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
               Email Address <FaAddressBook className=" text-success " />
             </Form.Label>
             <Form.Control
@@ -64,8 +64,8 @@ const LoginScreen = () => {
               className="p-2 rounded-0 "
             ></Form.Control>
           </Form.Group>
-          <Form.Group controlId="password" className="my-3 shadow-sm px-2 py-2 rounded-1">
-            <Form.Label>
+          <Form.Group controlId="password" className="my-1  px-2 py-2 rounded-1">
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
               Password <FaLock className=" text-success " />
             </Form.Label>
             <Form.Control
@@ -77,7 +77,7 @@ const LoginScreen = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="success" className="my-3" disabled ={isLoading}>
+          <Button type="submit" variant="success" className="my-3 mx-2 rounded-1 " disabled ={isLoading}>
             Sign in
           </Button>
 

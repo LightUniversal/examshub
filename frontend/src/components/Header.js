@@ -1,4 +1,4 @@
-import { Navbar, Nav, Container, Badge, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Container, Badge, NavDropdown, Image } from "react-bootstrap";
 import {
   FaShoppingCart,
   FaSignOutAlt,
@@ -60,9 +60,9 @@ const Header = () => {
               </LinkContainer>
               {userinfo ? (
                 <NavDropdown title={userinfo.name} id="username">
-                  <LinkContainer to="/profile">
+                  <LinkContainer to="/profile" className=" border-bottom shadow-sm ">
                     <NavDropdown.Item>
-                      Profile <FaUserPlus />
+                      Profile <Image src={userinfo.profile} alt="profile Image" className=" shadow" style={{ width:"50px", borderRadius:"100px"}}/>
                     </NavDropdown.Item>
                   </LinkContainer>
 

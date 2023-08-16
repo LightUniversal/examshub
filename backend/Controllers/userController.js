@@ -26,7 +26,7 @@ const authUser = asyncHandler(async (req, res) => {
 
 // register user
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, imageUrl } = req.body;
   console.log(req.body);
   // check user
   const userExist = await User.findOne({ email });
@@ -40,6 +40,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    profile: imageUrl
   });
   //   if user is created and in the database
   if (user) {
@@ -48,6 +49,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       email: user.email,
       name: user.name,
+      profile: user.profile,
       isAdmin: false,
     });
   } else {

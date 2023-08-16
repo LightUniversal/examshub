@@ -40,4 +40,11 @@ router.post('/', upload.single('image'), (req, res) => {
     });
 });
 
+router.post('/profileImage', upload.single('image'), (req, res) => {
+    console.log("online image")
+    res.send({
+        message: "Profile Image added successfully",
+        image: `/${req.file.path}`
+    });
+})
 export default router;
