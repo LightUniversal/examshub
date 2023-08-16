@@ -60,9 +60,9 @@ const Header = () => {
               </LinkContainer>
               {userinfo ? (
                 <NavDropdown title={userinfo.name} id="username">
-                  <LinkContainer to="/profile" className=" border-bottom shadow-sm fw-bold ">
+                  <LinkContainer to="/profile" className=" border-bottom shadow-sm fw-medium">
                     <NavDropdown.Item>
-                      Profile <Image src={userinfo.profile} alt="profile Image" className=" shadow" style={{ width:"40px", height:"40px", borderRadius:"100px"}}/>
+                      Profile <Image src={userinfo.profile} alt="profile Image" className=" shadow" style={{ width:"30px", height:"30px",position:"relative", top:"-2px", borderRadius:"100px"}}/>
                     </NavDropdown.Item>
                   </LinkContainer>
 
