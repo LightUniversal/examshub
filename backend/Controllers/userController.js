@@ -17,6 +17,7 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       profile: user.profile,
+      friends: user.friends,
     });
   } else {
     res.status(401);
@@ -82,6 +83,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
       name: user.name,
       isAdmin: user.isAdmin,
+      friends: user.friends
     });
   } else {
     res.status(404);
@@ -112,6 +114,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       isAdmin: updatedUser.isAdmin,
       profile: updatedUser.profile,
+      friends: user.friends
     });
   } else {
     res.status(400);
@@ -211,6 +214,11 @@ const getUserFriends = asyncHandler(async (req, res) => {
     })
   }
 });
+
+// Add and remove friend
+const addRemoveFriend = asyncHandler(async( req, res) => {
+
+})
 export {
   authUser,
   registerUser,
