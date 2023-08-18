@@ -5,10 +5,10 @@ import { genToken } from "../utils/genToke.js";
 // authenticate user
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
-  // check for the user, mongoose method
+  // check and get the user from the mongodb database
   const user = await User.findOne({ email });
 
+  // delete user.password
   if (user && (await user.matchPassword(password))) {
     genToken(res, user._id);
     res.status(200).json({
@@ -16,7 +16,7 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      profile: user.profile
+      profile: user.profile,
     });
   } else {
     res.status(401);
@@ -41,7 +41,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
-    profile: imageUrl
+    profile: imageUrl,
   });
   //   if user is created and in the database
   if (user) {
@@ -91,16 +91,15 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 // update user profile
 const updateUserProfile = asyncHandler(async (req, res) => {
-
   const user = await User.findById(req.user._id);
-  if(user) {
+  if (user) {
     // update only the name property of the user
     console.log(req.body);
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.profile = req.body.profile || user.profile
+    user.profile = req.body.profile || user.profile;
     // user.profile = req.body.
-    if(req.body.password){
+    if (req.body.password) {
       user.password = req.body.password;
     }
 
@@ -112,9 +111,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       name: updatedUser.name,
       isAdmin: updatedUser.isAdmin,
-      profile: updatedUser.profile
-
-    })
+      profile: updatedUser.profile,
+    });
   } else {
     res.status(400);
     throw new Error("User not found");
@@ -125,19 +123,19 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 // Admin get users
 const getUsers = asyncHandler(async (req, res) => {
-    const users = await User.find({});
-    res.status(200).json(users);
+  const users = await User.find({});
+  res.status(200).json(users);
 });
 
 // Admin get user by id
 const getUsersById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).select("-password");
 
-  if(user) {
+  if (user) {
     res.status(200).json(user);
   } else {
-    res.status(400)
-    throw new Error("User not found")
+    res.status(400);
+    throw new Error("User not found");
   }
 });
 
@@ -145,19 +143,19 @@ const getUsersById = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
-  if(user) {
-    if(user.isAdmin) {
+  if (user) {
+    if (user.isAdmin) {
       res.status(400);
       throw new Error("Cannot delete admin user");
     } else {
-      await User.deleteOne({_id:user._id});
+      await User.deleteOne({ _id: user._id });
       res.status(201).json({
-        message: "User deleted successfully"
+        message: "User deleted successfully",
       });
-    } 
+    }
   } else {
-      res.status(400);
-      throw new Error("User not found");
+    res.status(400);
+    throw new Error("User not found");
   }
 });
 
@@ -165,7 +163,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
-  if(user) {
+  if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.isAdmin = Boolean(req.body.isAdmin);
@@ -183,6 +181,36 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
+// new updates
+const getUserFriends = asyncHandler(async (req, res) => {
+  try {
+    const { id } = req.params.id;
+    const user = await User.findById(id);
+    const friends = await user.friends.map((id) => {
+      return User.findById(id);
+    });
+
+    const formattedFriends = friends.map(
+      (_id, name, email, faculty, department, profile) => {
+        return {
+          _id,
+          name,
+          email,
+          faculty,
+          department,
+          profile,
+        };
+      }
+    );
+
+    res.status(200).json(formattedFriends);
+    
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    })
+  }
+});
 export {
   authUser,
   registerUser,

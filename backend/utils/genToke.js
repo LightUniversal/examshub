@@ -14,3 +14,4 @@ export const genToken = (res, userId) => {
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });
 };
+// search for "What is the default way of setting JWT"

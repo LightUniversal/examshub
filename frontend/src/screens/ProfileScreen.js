@@ -67,8 +67,8 @@ const ProfileScreen = () => {
   return (
     <Row>
       <Col md={3}>
-        <h2 className=" shadow-sm py-3  text-center  ">
-          User Profile <Image src={userinfo.profile} alt="Profile image" className=" shadow" style={{ width:"50px", borderRadius:"100px"}} />
+        <h2 className=" shadow-sm py-3 px-2   text-left  ">
+          {userinfo.name} <Image src={userinfo.profile} alt="Profile image" className=" shadow" style={{ width:"50px", borderRadius:"100%"}} />
         </h2>
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name" className="my-2">
