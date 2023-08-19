@@ -83,7 +83,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
       name: user.name,
       isAdmin: user.isAdmin,
-      friends: user.friends
+      friends: user.friends,
+      faculty: user.faculty,
+      department: user.department
     });
   } else {
     res.status(404);
@@ -114,7 +116,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       isAdmin: updatedUser.isAdmin,
       profile: updatedUser.profile,
-      friends: user.friends
+      friends: user.friends,
+      faculty: user.faculty,
+      department: user.department
     });
   } else {
     res.status(400);
