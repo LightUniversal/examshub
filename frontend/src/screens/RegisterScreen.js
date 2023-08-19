@@ -5,9 +5,11 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import {
   FaAddressBook,
+  FaBuilding,
   FaGraduationCap,
   FaImage,
   FaLock,
+  FaSchool,
   FaSignInAlt,
   FaUserPlus,
 } from "react-icons/fa";
@@ -22,6 +24,8 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [faculty, setFaculty] = useState("");
+  const [department, setDepartment] = useState("");
   const [imageUrl, setImgUrl] = useState("");
 
   const dispatch = useDispatch();
@@ -49,7 +53,7 @@ const RegisterScreen = () => {
       toast.error("Passwords do not match");
     } else {
       try {
-        const res = await register({ email, password, name, imageUrl }).unwrap();
+        const res = await register({ email, password, name, imageUrl, faculty, department, friends: [] }).unwrap();
         // The unwrap extracts values
         dispatch(setCredentials({ ...res }));
         navigate(redirect);
@@ -106,6 +110,36 @@ const RegisterScreen = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter email"
+              className="p-2 rounded-0 "
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group
+            controlId="faculty"
+            className="my-1 px-2 py-2 rounded-1"
+          >
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
+              Faculty <FaBuilding className=" text-success " />
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={faculty}
+              onChange={(e) => setFaculty(e.target.value)}
+              placeholder="Enter your faculty"
+              className="p-2 rounded-0 "
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group
+            controlId="department"
+            className="my-1 px-2 py-2 rounded-1"
+          >
+            <Form.Label className="shadow-sm px-2 py-2 rounded-0">
+              Department <FaSchool className=" text-success " />
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+              placeholder="Enter your department"
               className="p-2 rounded-0 "
             ></Form.Control>
           </Form.Group>

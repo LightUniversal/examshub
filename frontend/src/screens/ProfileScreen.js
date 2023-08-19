@@ -7,6 +7,7 @@ import {
   FaCheck,
   FaCheckCircle,
   FaGoodreads,
+  FaRegBuilding,
   FaSchool,
   FaTimes,
   FaUserFriends,
@@ -87,7 +88,7 @@ const ProfileScreen = () => {
     <Row>
       <Col md={4}>
         <div className="head shadow-sm rounded-2 my-3 d-flex align-content-center justify-content-around flex-wrap ">
-          <h2 className=" py-3 fw-medium   w-100 text-center ">
+          <h2 className=" py-3 fw-medium   w-100 text-center">
             <Image
               src={userinfo.profile}
               alt="Profile image"
@@ -97,13 +98,13 @@ const ProfileScreen = () => {
              {userinfo.name}
           </h2>
           <h2 className=" d-inline-block border-top text-center  position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
-            <FaBuilding className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"100%", verticalAlign:"middle"}} />  <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.faculty} Faculty</span>
+            <FaRegBuilding className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"10%", verticalAlign:"middle"}} />  <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.faculty} Faculty</span>
           </h2>
           <h2 className=" d-inline-block  border-top text-center  position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
-            <FaUserFriends className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"100%", verticalAlign:"middle"}} /> <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ backgroundColor:"rgba(240, 255, 255,0.2)", fontSize:"12px"}}> {userinfo.friends.length} Study Mates</span>
+            <FaUserFriends className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"10%", verticalAlign:"middle"}} /> <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ backgroundColor:"rgba(240, 255, 255,0.2)", fontSize:"12px"}}> {userinfo.friends.length} Study Mates</span>
           </h2>
           <h2 className=" d-inline-block  border-top text-center  position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
-            <FaSchool className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"100%", verticalAlign:"middle"}} /> <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.department} Department</span>
+            <FaSchool className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"10%", verticalAlign:"middle"}} /> <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.department} Department</span>
           </h2>
         </div>
 

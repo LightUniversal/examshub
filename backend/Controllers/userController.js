@@ -28,7 +28,7 @@ const authUser = asyncHandler(async (req, res) => {
 
 // register user
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, imageUrl } = req.body;
+  const { name, email, password, imageUrl, faculty, department, friends } = req.body;
   console.log(req.body);
   // check user
   const userExist = await User.findOne({ email });
@@ -43,6 +43,9 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
     profile: imageUrl,
+    faculty,
+    department,
+    friends
   });
   //   if user is created and in the database
   if (user) {
@@ -52,6 +55,8 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       name: user.name,
       profile: user.profile,
+      faculty: user.faculty,
+      department: user.department,
       isAdmin: false,
     });
   } else {
@@ -116,9 +121,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       isAdmin: updatedUser.isAdmin,
       profile: updatedUser.profile,
-      friends: user.friends,
-      faculty: user.faculty,
-      department: user.department
+      friends: updatedUser.friends,
+      faculty: updatedUser.faculty,
+      department: updatedUser.department
     });
   } else {
     res.status(400);
