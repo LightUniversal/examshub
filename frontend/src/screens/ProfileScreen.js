@@ -29,6 +29,8 @@ const ProfileScreen = () => {
   const [password, setPassword] = useState("");
   const [profileImage, setProfile] = useState("");
   const [friends, setFriends] = useState("");
+  const [faculty, setFaculty] = useState("");
+  const [department, setDepartment] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const dispatch = useDispatch();
@@ -47,6 +49,8 @@ const ProfileScreen = () => {
       setEmail(userinfo.email);
       setProfile(userinfo.profile);
       setFriends(userinfo.friends);
+      setFaculty(userinfo.faculty);
+      setDepartment(userinfo.department);
     }
   }, [userinfo, userinfo.name, userinfo.email, userinfo.profile, userinfo.friends]);
 
@@ -73,7 +77,9 @@ const ProfileScreen = () => {
           email,
           password,
           profile: profileImage,
-          friends
+          friends,
+          faculty,
+          department
         }).unwrap();
         dispatch(setCredentials(res));
         toast.success("Profile Updated");
@@ -97,14 +103,14 @@ const ProfileScreen = () => {
             />
              {userinfo.name}
           </h2>
-          <h2 className=" d-inline-block border-top text-center  position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
-            <FaRegBuilding className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"10%", verticalAlign:"middle"}} />  <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.faculty} Faculty</span>
+          <h2 className=" d-inline-block border-top text-center justify-content-center    position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
+            <FaRegBuilding className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"20%", verticalAlign:"middle"}} />  <span className="  px-3 py-3 shadow-sm rounded-5 text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.faculty} Faculty</span>
           </h2>
-          <h2 className=" d-inline-block  border-top text-center  position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
-            <FaUserFriends className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"10%", verticalAlign:"middle"}} /> <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ backgroundColor:"rgba(240, 255, 255,0.2)", fontSize:"12px"}}> {userinfo.friends.length} Study Mates</span>
+          <h2 className=" d-inline-block  border-top text-center justify-content-center   position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
+            <FaUserFriends className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"20%", verticalAlign:"middle"}} /> <span className="  px-3 py-3 shadow-sm rounded-5 text-success" style={{ backgroundColor:"rgba(240, 255, 255,0.2)", fontSize:"12px"}}> {userinfo.friends.length} Study Mates</span>
           </h2>
-          <h2 className=" d-inline-block  border-top text-center  position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
-            <FaSchool className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"10%", verticalAlign:"middle"}} /> <span className="  px-2 py-2 shadow-sm rounded-1 text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.department} Department</span>
+          <h2 className=" d-inline-block  border-top text-center  position-relative d-flex justify-content-center   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
+            <FaSchool className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"20%", verticalAlign:"middle"}} /> <span className="  px-3 py-3 shadow-sm rounded-5  text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.department} Department</span>
           </h2>
         </div>
 

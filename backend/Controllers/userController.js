@@ -18,6 +18,8 @@ const authUser = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       profile: user.profile,
       friends: user.friends,
+      faculty: user.faculty,
+      department: user.department
     });
   } else {
     res.status(401);
@@ -121,9 +123,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       isAdmin: updatedUser.isAdmin,
       profile: updatedUser.profile,
-      friends: updatedUser.friends,
-      faculty: updatedUser.faculty,
-      department: updatedUser.department
     });
   } else {
     res.status(400);
