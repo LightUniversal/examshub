@@ -94,7 +94,7 @@ const ProfileScreen = () => {
     <Row>
       <Col md={4}>
         <div className="head shadow-sm rounded-2 my-3 d-flex align-content-center justify-content-around flex-wrap ">
-          <h2 className=" py-3 fw-medium   w-100 text-center">
+          <h2 className=" py-2 shadow-sm  fw-medium   w-100 text-center">
             <Image
               src={userinfo.profile}
               alt="Profile image"
@@ -103,19 +103,19 @@ const ProfileScreen = () => {
             />
              {userinfo.name}
           </h2>
-          <h2 className=" d-inline-block border-top text-center gap-2 justify-content-between    position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
+          <h2 className=" d-inline-block shadow-sm   text-center gap-2 justify-content-between    position-relative d-flex   mt-0 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
           <span className="  px-3 py-3 shadow-sm rounded-2 text-success" style={{ color:"green", fontSize:"12px"}}>
           <FaRegBuilding className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"20%", verticalAlign:"middle"}} /> Faculty
             </span>
               <span className="  px-3 py-3 shadow-sm rounded-2 text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.faculty} </span>
           </h2>
-          <h2 className=" d-inline-block  border-top text-center gap-2 justify-content-between   position-relative d-flex   mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
+          <h2 className=" d-inline-block shadow-sm  text-center gap-2 justify-content-between   position-relative d-flex   mt-0 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px",  alignItems:"center",}}>
             <span className="  px-3 py-3 shadow-sm rounded-2 text-success" style={{ backgroundColor:"rgba(240, 255, 255,0.1)", fontSize:"12px"}}>
             <FaUserFriends className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"20%", verticalAlign:"middle"}} /> Study-Mates
             </span>
              <span className="  px-3 py-3 shadow-sm rounded-2 text-success" style={{ backgroundColor:"rgba(240, 255, 255,0.1)", fontSize:"12px"}}> {userinfo.friends.length} Study Mates</span>
           </h2>
-          <h2 className=" d-inline-block  border-top text-center gap-2 position-relative d-flex justify-content-between    mt-2 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
+          <h2 className=" d-inline-block text-center gap-2 position-relative d-flex justify-content-between    mt-0 py-3 px-4 w-100 fw-medium" style={{fontSize:"15px", top:"-5px", alignItems:"center",}}>
             <span className="  px-3 py-3 shadow-sm rounded-2  text-success" style={{ color:"green", fontSize:"12px"}}>
             <FaSchool className=" shadow-sm px-2 py-1 mx-2 " style={{ color:"green", fontSize:"35px", borderRadius:"20%", verticalAlign:"middle"}} /> Department: 
               </span> <span className="  px-3 py-3 shadow-sm rounded-2  text-success" style={{ color:"green", fontSize:"12px"}}> {userinfo.department} </span>
