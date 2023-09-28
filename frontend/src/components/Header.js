@@ -39,7 +39,7 @@ const Header = () => {
       <Navbar  style={{backgroundColor: "black"}} variant="dark" expand="md" collapseOnSelect>
         <Container className=" py-2 px-3">
           <LinkContainer to="/" style={{ width:"100px", cursor:"pointer"}}>
-            <img src="/images/logo.png" alt="" className="" />
+            <img src="/images/elogo.png" alt="" className="" />
           </LinkContainer>
           <Navbar.Toggle
             aria-controls="basic-navbar"

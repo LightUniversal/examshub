@@ -8,7 +8,6 @@ const authUser = asyncHandler(async (req, res) => {
   // check and get the user from the mongodb database
   const user = await User.findOne({ email });
 
-  // delete user.password
   if (user && (await user.matchPassword(password))) {
     genToken(res, user._id);
     res.status(200).json({
@@ -179,7 +178,7 @@ const updateUser = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.isAdmin = Boolean(req.body.isAdmin);
 
-    const updatedUser = await user.save();
+    const updatedUser = await user.save(); 
     res.status(200).json({
       _id: updatedUser._id,
       name: updatedUser.name,
